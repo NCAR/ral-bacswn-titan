@@ -192,7 +192,7 @@ export RAP_SHARED_BIN_DIR=$CTH_INSTALL_DIR/bin
 export GCC_WARNINGS=-Wall
 
 #export HOST_OS=LINUX_LROSE
-export LROSE_INSTALL_DIR=$HOME/lrose
+export LROSE_INSTALL_DIR=/usr/local/lrose
 export LROSE_CORE_DIR=$HOME/git/lrose-core
 export PATH="$PATH:$LROSE_INSTALL_DIR/bin"
 alias qmake="/usr/bin/qmake6"
