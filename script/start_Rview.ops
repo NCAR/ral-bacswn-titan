@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# setenv DISPLAY :0.0
+
+cd $PROC_PARAMS
+
+running "Rview -params Rview.ops"
+if [[ $? -eq 1 ]]; then
+  Rview -params Rview.ops  |& \
+  LogFilter -d $LOG_DIR -p Rview -i ops &
+fi
+

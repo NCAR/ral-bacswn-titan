@@ -12,4 +12,6 @@ $GRID_DATA_DIR                                     local
 #
 # Server files for forecast statistics
 #
+$TITAN_SPDB_DIR                                    local _Tstorms2Symprod.fcst_30min _Tstorms2Symprod.fcst_60min
+
 ####################################################################

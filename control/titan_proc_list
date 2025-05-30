@@ -7,7 +7,8 @@
 DsProxyServer          primary                         start_inst()                 snuff_inst      localhost
 DataMapper             primary                         start_inst(no-params)        snuff_inst      localhost
 DsServerMgr            primary                         start_inst(no-params)        snuff_inst      localhost
-Janitor                titan_input                     start_inst()                 snuff_inst      localhost
+#Janitor                titan_input                     start_inst()                 snuff_inst      localhost
+Janitor                titan_work                      start_inst()                 snuff_inst      localhost
 
 ##################################################
 #
@@ -15,5 +16,15 @@ Janitor                titan_input                     start_inst()             
 #
 ##################################################
 #
-RadxConvert            KFTG_polar                      start_RadxConvert.KFTG_polar snuff_inst      localhost
+RadxConvert            KFTG_cfradial                   start_RadxConvert.RADAR_polar snuff_inst      localhost
+Radx2Grid              KFTG_cart                       start_Radx2Grid.RADAR_cart    snuff_inst      localhost
+
+##################################################
+#
+# TITAN PROCESSES
+#
+##################################################
+#
+Titan                  ops                             start_inst()                      snuff_inst      localhost
+Tstorms2Spdb           ops                             start_inst()                      snuff_inst      localhost
 

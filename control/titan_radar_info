@@ -1,0 +1,104 @@
+#
+# RADAR #1 info
+#
+export R1_NAME="KFTG"
+export R1_SITE_NAME=$R1_NAME
+export R1_LAT=39.7866
+export R1_LON=-104.546
+export R1_ALT_KM=1.709
+export R1_ALT_M=1709
+export R1_DESCRIPTION="Front Range NEXRAD"
+export R1_DATA_INFO="NEXRAD mosaic Front Range"
+#
+export R2_NAME="KFTG"
+export R2_SITE_NAME=$R2_NAME
+export R2_LAT=39.7866
+export R2_LON=-104.546
+export R2_ALT_KM=1.709
+export R2_ALT_M=1709
+export R2_DESCRIPTION="Front Range NEXRAD"
+export R2_DATA_INFO="NEXRAD mosaic Front Range"
+#
+#
+export RADAR_NAME=$R1_NAME
+export SITE_NAME=$R1_SITE_NAME
+export RADAR_LAT=$R1_LAT
+export RADAR_LON=$R1_LON
+export RADAR_ALT_KM=$R1_ALT_KM
+export RADAR_ALT_M=$R1_ALT_M
+export RADAR_DESCRIPTION=$R1_DESCRIPTION
+export RADAR_DATA_INFO=$R1_DATA_INFO
+#
+export TITAN_INPUT_DIR=$GRID_DATA_DIR/radar${RADAR_NAME}/cart
+export TITAN_OUTPUT_DIR=$PROJ_DATA_DIR/titan/storms/$RADAR_NAME
+export TITAN_SPDB_DIR=$SPDB_DATA_DIR/storms/$RADAR_NAME
+#
+#export TITAN_INPUT_DIR=$GRID_DATA_DIR/radarCartMerge
+#export TITAN_OUTPUT_DIR=$PROJ_DATA_DIR/titan/storms/mosaic
+#export TITAN_SPDB_DIR=$SPDB_DATA_DIR/storms/mosaic
+#
+
+#
+# Host where the data is stored
+#
+export DATA_HOST=localhost
+
+#
+# typical time between volumes (secs)
+#
+export SCAN_DELTA_T=300
+
+#
+# Lowest cappi for cart grid (km)
+#
+export CART_GRID_START_HT=1.5
+
+# Start height for Rview
+
+export RVIEW_START_HT=2.0
+
+# Map config file for Rview
+
+export RVIEW_MAP_CONF_FILE=denver.conf
+
+# Precip estimation
+
+export ZR_COEFF=200.0
+export ZR_EXPON=1.6
+export HAIL_DBZ_THRESHOLD=53
+
+#############################################
+
+# PRECIP RATE COMPUTATIONS - RadxPartRain
+
+export ZH_AA=0.027366
+export ZH_BB=0.69444
+
+export ZH_AA_SNOW=0.0365
+export ZH_BB_SNOW=0.625
+
+export ZZDR_AA=0.0067
+export ZZDR_BB=0.927
+export ZZDR_CC=-3.43
+
+# the following from rszhkov/wilson, personal communication 2016
+
+export KDP_AA=29.0  
+export KDP_BB=0.77
+
+export KDPZDR_AA=90.8
+export KDPZDR_BB=0.93
+export KDPZDR_CC=-2.86
+
+export HYBRID_DBZ_THRESHOLD=40
+export HYBRID_KDP_THRESHOLD=0.3
+export HYBRID_ZDR_THRESHOLD=0.5
+
+export HIDRO_DBZ_THRESHOLD=38
+export HIDRO_KDP_THRESHOLD=0.3
+export HIDRO_ZDR_THRESHOLD=0.5
+
+export BRINGI_DBZ_THRESHOLD=40
+export BRINGI_KDP_THRESHOLD=0.15
+export BRINGI_ZDR_THRESHOLD=0.1
+

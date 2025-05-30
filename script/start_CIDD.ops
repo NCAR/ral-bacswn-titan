@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set_font_path
+
+cd $PROC_PARAMS
+
+running "CIDD -p CIDD.ops"
+if [[ $? -eq 1 ]]; then
+  CIDD -p CIDD.ops -i ops | \
+  LogFilter -d $LOG_DIR -p CIDD -i ops &
+fi
+

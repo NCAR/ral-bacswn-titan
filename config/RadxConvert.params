@@ -1720,7 +1720,7 @@ variable_transform_fields = {
 //     OUTPUT_FORMAT_ODIM_HDF5
 //
 
-output_format = OUTPUT_FORMAT_MDV_RADIAL;
+output_format = OUTPUT_FORMAT_CFRADIAL;
 
 ///////////// netcdf_style ////////////////////////////
 //
@@ -2008,7 +2008,7 @@ write_individual_sweeps = FALSE;
 // Type: boolean
 //
 
-write_latest_data_info = FALSE;
+write_latest_data_info = TRUE;
 
 ///////////// write_using_proposed_standard_name_attr /
 //

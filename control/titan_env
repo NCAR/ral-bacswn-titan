@@ -90,6 +90,16 @@ export PERL5LIB=$PROJ_DIR/lib/perl5
 #
 
 ##################################################################
+#
+# Radar information
+#
+##################################################################
+if [ -f "$PROJ_CONTROL_DIR/titan_radar_info" ]
+then
+    source $PROJ_CONTROL_DIR/titan_radar_info
+fi
+
+##################################################################
 
 
 ##################################################################
@@ -109,9 +119,9 @@ export INPUT_RADAR_DIR=$INPUT_DIR/radar
 #
 ##################################################################
 #
-if [ -f "$CONTROL_PARAMS/GRID_ENV" ]
+if [ -f "$PROJ_CONTROL_DIR/GRID_ENV" ]
 then
-    source $CONTROL_PARAMS/GRID_ENV
+    source $PROJ_CONTROL_DIR/GRID_ENV
 fi
 #
 ##################################################################
