@@ -1,0 +1,91 @@
+add_custom_command(
+    OUTPUT Params.cc
+    OUTPUT Params.hh
+    PRE_BUILD
+    COMMAND $ENV{RAP_BIN_DIR}/tdrp_gen -f ${CMAKE_CURRENT_SOURCE_DIR}/paramdef.Titan -c++ -prog Titan
+    COMMAND ${CMAKE_COMMAND} -E copy Params.cc ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMAND ${CMAKE_COMMAND} -E copy Params.hh ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+set(SOURCE_FILES
+    Params.hh
+    Args.hh
+    Area.hh
+    Boundary.hh
+    Clumping.hh
+    ConvectionFinder.hh
+    DataTimes.hh
+    DualThresh.hh
+    FileLock.hh
+    GridClump.hh
+    Identify.hh
+    InputMdv.hh
+    OutputMdv.hh
+    Props.hh
+    Sounding.hh
+    StormIdent.hh
+    StormTrack.hh
+    TitanDriver.hh
+    TrConsolidate.hh
+    TrForecast.hh
+    TrOverlaps.hh
+    TrStorm.hh
+    TrTrack.hh
+    Verify.hh
+    Worker.hh
+    Params.cc
+    Args.cc
+    Area.cc
+    Boundary.cc
+    Clumping.cc
+    ConvectionFinder.cc
+    DataTimes.cc
+    DualThresh.cc
+    FileLock.cc
+    GridClump.cc
+    Identify.cc
+    InputMdv.cc
+    Main.cc
+    OutputMdv.cc
+    Props.cc
+    Sounding.cc
+    StormIdent.cc
+    StormTrack.cc
+    TitanDriver.cc
+    TrConsolidate.cc
+    TrForecast.cc
+    TrMatch.cc
+    TrOverlaps.cc
+    TrStorm.cc
+    TrTrack.cc
+    TrUpdate.cc
+    Verify.cc
+    Worker.cc
+    )
+
+add_executable(Titan ${SOURCE_FILES})
+target_link_libraries(Titan
+    titan
+    -lradar
+    -lMdv
+    -lRadx
+    -lNcxx
+    -lSpdb
+    -ldsserver
+    -ldidss
+    -lrapmath
+    -leuclid
+    -lrapformats
+    -lphysics
+    -ltoolsa
+    -ldataport
+    -ltdrp
+    -lz
+    -lbz2
+    -lhdf5_hl
+    -lhdf5_hl_cpp
+    -lhdf5
+    -lhdf5_cpp
+    -lnetcdf
+    -lpthread
+    )

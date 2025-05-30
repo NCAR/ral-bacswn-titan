@@ -1,0 +1,44 @@
+set(SOURCE_FILES
+        src/include/didss/DataFileNames.hh
+        src/include/didss/ds_input_path.h
+        src/include/didss/ds_message.h
+        src/include/didss/ds_msg_handle.h
+        src/include/didss/DsAccess.hh
+        src/include/didss/DsAccessFile.hh
+        src/include/didss/DsDataFile.hh
+        src/include/didss/DsInputPath.hh
+        src/include/didss/DsMessage.hh
+        src/include/didss/DsMsgPart.hh
+        src/include/didss/DsTimeList.hh
+        src/include/didss/DsURL.hh
+        src/include/didss/DsUrlQueue.hh
+        src/include/didss/IPAddress.hh
+        src/include/didss/LdataInfo.hh
+        src/include/didss/rap_data_dir.h
+        src/include/didss/RapDataDir.hh
+        src/include/didss/RapDataDir_r.hh
+        src/DataFileNames/DataFileNames.cc
+        src/DataFileNames/TestDfn.cc
+        src/DsAccess/DsAccess.cc
+        src/DsAccess/DsAccessFile.cc
+        src/DsAccess/IPAddress.cc
+        src/DsInputPath/ds_input_path.c
+        src/DsInputPath/DsDataFile.cc
+        src/DsInputPath/DsInputPath.cc
+        src/DsInputPath/DsTimeList.cc
+        src/DsMessage/ds_message.c
+        src/DsMessage/ds_msg_handle.c
+        src/DsMessage/DsMessage.cc
+        src/DsMessage/DsMsgPart.cc
+        src/DsURL/DsURL.cc
+        src/DsURL/DsUrlQueue.cc
+        src/LdataInfo/LdataInfo.cc
+        src/RapDataDir/RapDataDir.cc
+        src/RapDataDir/RapDataDir_r.cc
+)
+add_library(didss ${SOURCE_FILES})
+target_include_directories(didss PUBLIC
+        ./src/include
+        ${CMAKE_SOURCE_DIR}/libs/dataport/src/include
+        ${CMAKE_SOURCE_DIR}/libs/toolsa/src/include
+)

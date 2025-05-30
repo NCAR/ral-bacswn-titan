@@ -1,0 +1,76 @@
+#!/bin/sh
+
+export PROJECTION=LATLON
+
+#
+# The Radar Grid includes: Radx2Grid (cart and polar)
+#
+export RADAR_NX=920
+export RADAR_NY=920
+export RADAR_NZ=20
+export RADAR_DX=1
+export RADAR_DY=1
+export RADAR_DZ=1
+export RADAR_MINX=-459.5
+export RADAR_MINY=-459.5
+export RADAR_MINZ=1.5
+
+#
+# The Radar Grid includes: Radx2Grid (ppi)
+# Grid VDRAS group prefers for this data
+#
+export PPI_NX=460
+export PPI_NY=460
+export PPI_DX=1
+export PPI_DY=1
+export PPI_MINX=-229.5
+export PPI_MINY=-229.5
+
+#
+# The Merged Grid includes: MdvMerge
+#                            ctrec
+# cronus.ltgPotential
+# lmaFlashExtent.wsmr
+# Indicator
+# fuzzy_engine.mask2
+# fuzzy_engine.mask
+# fuzzy_engine.nrl
+# MdvMerge2.cart
+# LtgSpdb2Mdv
+#
+export MERGED_NX=1100
+export MERGED_NY=665
+export MERGED_NZ=30 
+export MERGED_DX=0.009
+export MERGED_DY=0.009
+export MERGED_DZ=0.25
+export MERGED_MINX=-96.0
+export MERGED_MINY=38.0
+export MERGED_MINZ=0.5
+export MERGED_LAT=33.07583
+export MERGED_LON=-106.12194
+#
+export MODEL_PRES_NX=114
+export MODEL_PRES_NY=105
+export MODEL_PRES_NZ=37 
+export MODEL_PRES_DX=10.0
+export MODEL_PRES_DY=10.0
+export MODEL_PRES_DZ=-25
+export MODEL_PRES_MINX=-580.109375
+export MODEL_PRES_MINY=-520.081665
+export MODEL_PRES_MINZ=1000   
+export MODEL_PRES_LAT=34.642799
+export MODEL_PRES_LON=-106.0
+
+export MODEL_HYB_NX=55
+export MODEL_HYB_NY=55
+export MODEL_HYB_NZ=50 
+export MODEL_HYB_DX=20
+export MODEL_HYB_DY=20
+export MODEL_HYB_DZ=1
+export MODEL_HYB_MINX=-550
+export MODEL_HYB_MINY=-550
+export MODEL_HYB_MINZ=0   
+export MODEL_HYB_LAT=33.07583
+export MODEL_HYB_LON=-106.12194
+#

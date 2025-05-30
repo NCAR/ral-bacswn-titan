@@ -1,0 +1,19 @@
+##################################################
+#
+# CORE PROCESSES
+#
+##################################################
+#
+DsProxyServer          primary                         start_inst()                 snuff_inst      localhost
+DataMapper             primary                         start_inst(no-params)        snuff_inst      localhost
+DsServerMgr            primary                         start_inst(no-params)        snuff_inst      localhost
+Janitor                titan_input                     start_inst()                 snuff_inst      localhost
+
+##################################################
+#
+# INGEST PROCESSES
+#
+##################################################
+#
+RadxConvert            KFTG_polar                      start_RadxConvert.KFTG_polar snuff_inst      localhost
+

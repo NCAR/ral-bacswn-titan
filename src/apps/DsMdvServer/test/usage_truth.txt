@@ -1,0 +1,37 @@
+Usage: DsMdvServer [options as below]
+options:
+       [ --, -h, -help, -man ] produce this list.
+       [ -cmax ? ] set max number of clients.
+       [ -debug ] print debug messages.
+       [ -instance ? ] override instance.
+         Default is port number.
+       [ -noThreads ] force single-threaded operation.
+       [ -port ? ] set port number.
+       [ -qmax ? ] set max quiescent period (secs).
+       [ -readOnly ] run in read-only mode.
+       [ -allowHttp ] allow http requests (server will strip 
+                 off header in request message).
+       [ -secure ] run in secure mode.
+         No puts to absolute paths, i.e. starting with '/'
+                 or paths containing '..'
+       [ -verbose ] print verbose debug messages.
+
+Note: DsMdvServer listens on port 5440 by default.
+
+TDRP args: [options as below]
+   [ -params/--params path ] specify params file path
+   [ -check_params/--check_params] check which params are not set
+   [ -print_params/--print_params [mode]] print parameters
+     using following modes, default mode is 'norm'
+       short:   main comments only, no help or descriptions
+                structs and arrays on a single line
+       norm:    short + descriptions and help
+       long:    norm  + arrays and structs expanded
+       verbose: long  + private params included
+       short_expand:   short with env vars expanded
+       norm_expand:    norm with env vars expanded
+       long_expand:    long with env vars expanded
+       verbose_expand: verbose with env vars expanded
+   [ -tdrp_debug] debugging prints for tdrp
+   [ -tdrp_usage] print this usage
+

@@ -1,0 +1,38 @@
+Usage: Janitor [options as below]
+options:
+  [ -h, --, -?, -help ] produce this list.
+  [ -d, -debug ] print debug messages
+  [ -delay ? ] set the delay between passes - secs
+  [ -instance ? ] set the program instance
+  [ -once ] traverse once and then exit
+  [ -report ] turn on reporting
+    Writes a report file in each dir
+  [ -top ? ] set top level directory
+  [ -v, -verbose ] print verbose debug messages
+  [ -vv, -extra ] print extra verbose debug messages
+
+  The Janitor performs simple housekeeping tasks.
+  It recurses through a directory tree. If it finds a 
+  file named '_Janitor' anywhere, it reads parameters
+  from this file. When the Janitor pops up out of
+  the directory these changes are lost and the processing
+  reverts to the parameters at the higher level.
+
+  The Janitor is described in more depth in its web page.
+
+TDRP args: [options as below]
+   [ -params/--params path ] specify params file path
+   [ -check_params/--check_params] check which params are not set
+   [ -print_params/--print_params [mode]] print parameters
+     using following modes, default mode is 'norm'
+       short:   main comments only, no help or descr
+                structs and arrays on a single line
+       norm:    short + descriptions and help
+       long:    norm  + arrays and structs expanded
+       verbose: long  + private params included
+       short_expand:   short with env vars expanded
+       norm_expand:    norm with env vars expanded
+       long_expand:    long with env vars expanded
+       verbose_expand: verbose with env vars expanded
+   [ -tdrp_debug] debugging prints for tdrp
+   [ -tdrp_usage] print this usage

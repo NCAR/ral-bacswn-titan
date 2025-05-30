@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+
+cd $SCRIPT_DIR
+source ../control/${PROJ}_bashrc
+
+#
+# start procmap only if cron is active
+#
+
+checkfile=/tmp/croncheck_procmap
+crontab -l >& $checkfile
+grep "no crontab" $checkfile >& /dev/null
+
+# if grep returns 1, cron is there so go ahead
+
+if [[ $? == 1 ]]; then
+    start_procmap
+fi
+
+# rm tmp file
+
+/bin/rm -f $checkfile

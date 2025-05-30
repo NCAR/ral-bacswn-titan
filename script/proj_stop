@@ -1,0 +1,37 @@
+#!/bin/bash
+# Script to stop the Project running system by removing crontab and using procmap_list_kill
+# Identifies crontab and procfile in $PROJ_CONTROL_DIR as either:
+# ${PROJ}_crontab_${SHOST} or ${PROJ}_crontab
+# ${PROJ}_pro_list_${SHOST} or ${PROJ}_pro_list
+
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+
+cd $SCRIPT_DIR
+source ../control/${PROJ}_bashrc
+
+cronfile="${PROJ}_crontab"
+proclist="${PROJ}_proc_list"
+if [ ! -z "$SHOST" ]; then
+    [ -f "$PROJ_CONTROL_DIR/${PROJ}_crontab_${SHOST}" ] && cronfile="${PROJ}_crontab_${SHOST}"
+    [ -f "$PROJ_CONTROL_DIR/${PROJ}_proc_list_${SHOST}" ] && proclist="${PROJ}_proc_list_${SHOST}"
+fi
+
+if [ ! -f "$PROJ_CONTROL_DIR/${cronfile}" ] || [ ! -f "$PROJ_CONTROL_DIR/${proclist}" ]; then
+    echo "ERROR: Cannot find $cronfile or $proclist in : $PROJ_CONTROL_DIR"
+    exit 1
+fi
+
+echo "Removing crontab on host $HOSTNAME"
+crontab -r
+
+echo "Killing process auto_restart ${proclist} on host $HOSTNAME"
+snuff_inst auto_restart ${proclist}
+
+procmap_list_kill -fast -proc_list $PROJ_CONTROL_DIR/${proclist}
+
+snuff procmap
+
+snuff DsMdvServer WxHazards2Symprod Tstorms2Symprod DsSpdbServer DsFCopyServer
+snuff Ltg2Symprod GenPoly2Symprod GenPt2Symprod
+snuff Xvfb

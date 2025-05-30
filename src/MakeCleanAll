@@ -1,0 +1,49 @@
+#!/bin/bash
+
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+
+cd $SCRIPT_DIR
+FULL_PATH=`pwd`
+
+source ../control/${PROJ}_env
+
+BUILD_DIR=$FULL_PATH
+INSTALL_DIR=$FULL_PATH/..
+
+cd $BUILD_DIR 
+
+PATH=$PATH:$INSTALL_DIR/bin
+
+export HOST_OS=LINUX_CX14
+
+#
+# set up for the build.
+#
+export RAP_MAKE_INC_DIR=$BUILD_DIR/make_include
+export RAP_INC_DIR=$INSTALL_DIR/include
+export RAP_LIB_DIR=$INSTALL_DIR/lib
+export RAP_BIN_DIR=$INSTALL_DIR/bin
+export RAP_SHARED_INC_DIR=$INSTALL_DIR/include
+export RAP_SHARED_LIB_DIR=$INSTALL_DIR/lib
+export RAP_SHARED_BIN_DIR=$INSTALL_DIR/bin
+
+[ -d $BUILD_DIR/incs ] && cd $BUILD_DIR/incs && make clean_all
+[ -d $BUILD_DIR/libs/tdrp ] && cd $BUILD_DIR/libs/tdrp && make clean_all
+[ -d $BUILD_DIR/apps/tdrp_gen ] && cd $BUILD_DIR/apps/tdrp_gen && make clean_all
+
+cd $BUILD_DIR
+source ../control/${PROJ}_liblist
+for lib in ${libs[@]}
+do
+    [ -e $BUILD_DIR/libs/$lib ] && cd $BUILD_DIR/libs/$lib && make clean_all
+done
+
+cd $BUILD_DIR
+source ../control/${PROJ}_applist
+for app in ${apps[@]}
+do
+    [ -e $BUILD_DIR/apps/$app ] && cd $BUILD_DIR/apps/$app && make clean_all
+done
+
+exit

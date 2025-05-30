@@ -1,0 +1,104 @@
+
+Usage: SpdbQuery [args as below]
+
+Required:
+
+  [ -url ? ] specify URL
+     URL format: spdbp:://host:port:directory (port optional)
+                   or
+                 directory
+
+Options:
+
+  [ --, -h, -help, -man ] produce this list.
+
+  [ -as_xml ] print out as xml
+     Instead of normal output, print out as xml
+
+  [ -compress ] set compression for get messages
+     If a server is contacted, the data part of the return message
+     will be compressed
+
+  [ -debug ] print debug messages.
+
+  [ -verbose ] print verbose debug messages.
+
+  [ -mode ? ] get mode
+     options: interval (default), exact, closest, valid,
+              latest, before, after, times, header, timelist
+     Note: header is for local request only
+
+  [ -time ? ] request_time: defaults to now
+     modes: exact, closest, before, after, valid, header
+     format: "YYYY MM DD HH MM SS"
+
+  [ -start ? ] start_time: defaults to (now - 1 day)
+     mode: interval, timelist
+     format: "YYYY MM DD HH MM SS"
+
+  [ -end ? ] end_time: defaults to now
+     mode: interval, timelist
+     format: "YYYY MM DD HH MM SS"
+
+  [ -margin ? ] time_margin (secs): defaults to 1 day
+     modes: closest, latest, before, after
+
+  [ -min_interval ? ] timelist min interval (secs): defaults to 1
+     modes: timelist
+
+  [ -unique ? ] get unique
+     options: latest, earliest
+
+  [ -data_type ? ] set data type.
+     Either specify int or string - string will be hashed into
+     an int. Default is 0.
+     If string begins with digit, enclose in double quotes. Make sure
+       to escape the double quotes in the shell. e.g. \"01\"
+     May also be a comma-delimited list, no spaces
+
+  [ -data_type2 ? ] set data type 2.
+     Either specify int or string - string will be hashed into
+     an int. Default is 0.
+     If string begins with digit, enclose in double quotes. Make sure
+       to escape the double quotes in the shell. e.g. \"01\"
+
+  [ -refs_only ] only get chunk refs, no data.
+
+  [ -time_label] print only valid time, instead of full header.
+
+  [ -no_header] do not print header information, only data.
+
+  [ -blank_line ] add a blank line separator between entries.
+
+  [ -last_n ? ] only print the last n items found.
+     Use -unique to get the last 1 item found.
+
+  [ -reverse ] print in reverse order (newest first).
+
+  [ -respect_zero ] respect zero data types.
+                    Only applies to get functions.
+
+  [ -hlimits "min_lat min_lon max_lat max_lon" ] set horiz limits.
+     Only applicable to queries to servers which support this
+     feature e.g. Metar2Symprod.
+
+  [ -threaded ] use threading for testing
+    Uses DsSpdbThreaded object instead of DsSpdb object
+
+  [ -vlimits "min_ht max_ht"] set vertical limits.
+     Only applicable to queries to servers which support this
+     feature.
+
+  [ -lwrite ? ] set latest write time on get
+     Only data written before this time will be returned on get.
+     Format: "YYYY MM DD HH MM SS"
+
+  [ -xml ? ] set path for auxiliary xml commands
+     If set, will read in XML commands from the specified path
+     and set the auxXml string on the Spdb object.
+     The aux xml will be sent to the server as applicable.
+
+  [ -xml_headers] print chunk header information in XML.
+                  Default is false. Use with -as_xml
+
+

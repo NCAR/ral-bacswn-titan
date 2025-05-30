@@ -1,0 +1,27 @@
+set(SOURCE_FILES
+        src/DrawQueue/DrawQueue.cc
+        src/DsFmq/DsFmq.cc
+        src/DsFmq/DsFmqMsg.cc
+        src/DsRadarQueue/DsRadarQueue.cc
+        src/Fmq/Fmq.cc
+        src/Fmq/FmqDevice.cc
+        src/Fmq/FmqDeviceFile.cc
+        src/Fmq/FmqDeviceShmem.cc
+        src/GenericQueue/GenericQueue.cc
+        src/include/Fmq/DrawQueue.hh
+        src/include/Fmq/DsFmq.hh
+        src/include/Fmq/DsFmqMsg.hh
+        src/include/Fmq/DsRadarQueue.hh
+        src/include/Fmq/Fmq.hh
+        src/include/Fmq/FmqDevice.hh
+        src/include/Fmq/FmqDeviceFile.hh
+        src/include/Fmq/FmqDeviceShmem.hh
+        src/include/Fmq/GenericQueue.hh
+        src/include/Fmq/NowcastProcess.hh
+        src/include/Fmq/NowcastQueue.hh
+        src/include/Fmq/RemoteUIQueue.hh
+        src/NowcastQueue/NowcastProcess.cc
+        src/NowcastQueue/NowcastQueue.cc
+        src/RemoteUIQueue/RemoteUIQueue.cc
+)
+add_library(Fmq ${SOURCE_FILES})

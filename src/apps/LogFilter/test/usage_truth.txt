@@ -1,0 +1,24 @@
+Usage: LogFilter -d logdir -p procname [options as below]
+options:
+       [ -h ] produce this list.
+       [ -debug ] print debug messages
+       [ -p ] set process name 
+       [ -i ] set process instance
+       [ -hourly ] set the logs to be placed in hourly files
+       [ -single ] create a single log file, not one per day
+       [ -t ] interval between time stamp prints (sec)
+              defaults to 3600, -1 disables printing
+       [ -keepRunningOnError ] keep running if an error occurs
+       [ -noLineStamp ] do not time-stamp every line
+
+LogFilter reads ascii log messages from stdin, and copies
+  them to a log file in the specified log directory.
+  The file name is logdir/yyyymmdd/procname.instance.log, or
+  logdir/yyyymmdd/procname.log if the instance is not specfied.
+  yyyymmdd is is the current date. The default behavior is for a
+  new file to be created each day.
+  If the -hourly option is set the hour is appended to the end
+  of the filename, and a new file is created every hour.
+  Time stamp information is also inserted into the log stream,
+  at the interval specified with -t. Set to -1 to disable.
+

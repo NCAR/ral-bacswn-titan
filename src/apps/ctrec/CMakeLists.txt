@@ -1,0 +1,56 @@
+project(ctrec)
+if(COMMAND run_tdrp_gen)
+    run_tdrp_gen(${PROJECT_NAME})
+endif()
+
+set(SOURCE_FILES
+    Params.hh
+    Args.hh
+    ClutterRemover.hh
+    Ctrec.hh
+    CtrecAlg.hh
+    DataDetrender.hh
+    DiffTemporalSmoother.hh
+    GridSearcher.hh
+    NoiseGenerator.hh
+    NullTemporalSmoother.hh
+    PrevTemporalSmoother.hh
+    SimpleGrid.hh
+    TemporalSmoother.hh
+    Params.cc
+    Main.cc
+    Args.cc
+    ClutterRemover.cc
+    Ctrec.cc
+    CtrecAlg.cc
+    DataDetrender.cc
+    DiffTemporalSmoother.cc
+    NoiseGenerator.cc
+    NullTemporalSmoother.cc
+    PrevTemporalSmoother.cc
+    TemporalSmoother.cc
+    )
+
+add_executable(ctrec ${SOURCE_FILES})
+target_link_libraries(ctrec
+    -ldsdata
+    -lMdv
+    -lSpdb
+    -lRadx
+    -lNcxx
+    -ldsserver
+    -lrapformats
+    -ldidss
+    -leuclid
+    -lrapmath
+    -ltdrp
+    -ltoolsa
+    -ldataport
+    -lz
+    -lbz2
+    -lhdf5_hl
+    -lhdf5_hl_cpp
+    -lhdf5
+    -lhdf5_cpp
+    -lnetcdf
+    )

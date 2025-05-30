@@ -1,0 +1,47 @@
+set(SOURCE_FILES
+        src/include/dsserver/DestUrlArray.hh
+        src/include/dsserver/DmapAccess.hh
+        src/include/dsserver/DmapMessage.hh
+        src/include/dsserver/DsClient.hh
+        src/include/dsserver/DsFileCopy.hh
+        src/include/dsserver/DsFileCopyMsg.hh
+        src/include/dsserver/DsFileIo.hh
+        src/include/dsserver/DsFileIoMsg.hh
+        src/include/dsserver/DsLdataInfo.hh
+        src/include/dsserver/DsLdataMsg.hh
+        #src/include/dsserver/DsLdataServerMsg.hh
+        src/include/dsserver/DsLocator.hh
+        src/include/dsserver/DsProcessServer.hh
+        src/include/dsserver/DsServer.hh
+        src/include/dsserver/DsServerMsg.hh
+        src/include/dsserver/DsSvrMgrSocket.hh
+        src/include/dsserver/DsThreadedClient.hh
+        src/include/dsserver/DsThreadedServer.hh
+        src/include/dsserver/ProcessServer.hh
+        src/DataMapper/DmapAccess.cc
+        src/DataMapper/DmapMessage.cc
+        src/DestUrlArray/DestUrlArray.cc
+        src/DsClient/DsClient.cc
+        src/DsClient/DsThreadedClient.cc
+        src/DsFileCopy/DsFileCopy.cc
+        src/DsFileCopy/DsFileCopyMsg.cc
+        src/DsFileIo/DsFileIo.cc
+        src/DsFileIo/DsFileIoMsg.cc
+        src/DsLdataInfo/DsLdataInfo.cc
+        src/DsLdataInfo/DsLdataMsg.cc
+        #src/DsLdataInfo/DsLdataServerMsg.cc
+        src/DsLocator/DsLocator.cc
+        src/DsServer/DsProcessServer.cc
+        src/DsServer/DsServer.cc
+        src/DsServer/DsServerMsg.cc
+        src/DsServer/DsThreadedServer.cc
+        src/DsServer/ProcessServer.cc
+        src/DsSvrMgrSocket/DsSvrMgrSocket.cc
+)
+add_library(dsserver ${SOURCE_FILES})
+target_include_directories(dsserver PUBLIC
+        ./src/include
+        ${CMAKE_SOURCE_DIR}/libs/dataport/src/include
+        ${CMAKE_SOURCE_DIR}/libs/toolsa/src/include
+        ${CMAKE_SOURCE_DIR}/libs/didss/src/include
+)

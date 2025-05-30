@@ -1,0 +1,65 @@
+#!/bin/bash
+# Script to start the Project system by installing the crontab and using procmap_list_start
+# Identifies crontab and procfile in $PROJ_CONTROL_DIR as either:
+# ${PROJ}_crontab_${SHOST} or ${PROJ}_crontab
+# ${PROJ}_pro_list_${SHOST} or ${PROJ}_pro_list
+
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+
+cd $SCRIPT_DIR
+source ../control/${PROJ}_bashrc
+
+cronfile="${PROJ}_crontab"
+proclist="${PROJ}_proc_list"
+applist="${PROJ}_applist"
+if [ ! -z "$SHOST" ]; then
+    [ -f "$PROJ_CONTROL_DIR/${PROJ}_crontab_${SHOST}" ] && cronfile="${PROJ}_crontab_${SHOST}"
+    [ -f "$PROJ_CONTROL_DIR/${PROJ}_proc_list_${SHOST}" ] && proclist="${PROJ}_proc_list_${SHOST}"
+    [ -f "$PROJ_CONTROL_DIR/${PROJ}_applist_${SHOST}" ] && proclist="${PROJ}_applist_${SHOST}"
+fi
+
+if [ ! -f "$PROJ_CONTROL_DIR/${cronfile}" ] || [ ! -f "$PROJ_CONTROL_DIR/${proclist}" ]; then
+    echo "ERROR: Cannot find $cronfile or $proclist in : $PROJ_CONTROL_DIR"
+    exit 1
+fi
+
+echo "Starting Project: $PROJ"
+echo "Using Proc List: ${PROJ_CONTROL_DIR}/${proclist}"
+echo "Using Crontab  : ${PROJ_CONTROL_DIR}/${cronfile}"
+
+missing_app=0
+if [ -f "$PROJ_CONTROL_DIR/${applist}" ]; then
+   source ../control/$applist
+   for app in "${apps[@]}"
+   do
+       if [ ! -f "$RAP_BIN_DIR/${app}" ];then
+	   echo "ERROR: App \"$app\" not found in $RAP_BIN_DIR"
+	   missing_app=1
+       fi
+   done
+fi
+if [[ $missing_app == 1 ]]; then
+    echo "Unable to start $PROJ proj due to missing Apps"
+    exit 3
+fi
+
+proj_mkdata
+
+start_procmap
+
+echo "procmap_list_start -proc_list $PROJ_CONTROL_DIR/$proclist"
+procmap_list_start -proc_list $PROJ_CONTROL_DIR/$proclist
+
+echo "RUNNING: DataMapper -delete all all all"
+echo "  - Cleans out the data store for a fresh start"
+echo ""
+DataMapper -delete all all all
+
+start_auto_restart
+
+crontab -l >& /dev/null
+if [[ $? == 1 ]]; then
+    echo "Installing crontab on host $HOSTNAME"
+    crontab $PROJ_CONTROL_DIR/$cronfile &
+fi

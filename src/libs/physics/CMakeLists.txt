@@ -1,0 +1,31 @@
+set(SOURCE_FILES
+        src/include/physics/_PhysicsLibImplementation.hh
+        src/include/physics/AdiabatTempLookupTable.hh
+        src/include/physics/CapeCinSounding.hh
+        src/include/physics/density.h
+        src/include/physics/DtfMwave.hh
+        src/include/physics/IcaoStdAtmos.hh
+        src/include/physics/physics.h
+        src/include/physics/physics_macros.h
+        src/include/physics/PhysicsLib.hh
+        src/include/physics/stn_pressure.h
+        src/include/physics/thermo.h
+        src/include/physics/vil.h
+        src/include/physics/ZxRelation.hh
+        src/gtg/DtfMwave.cc
+        src/itfa/DtfMwave.cc
+        src/physics/AdiabatTempLookupTable.cc
+        src/physics/CapeCin.cc
+        src/physics/CapeCinSounding.cc
+        src/physics/density.c
+        src/physics/e_sub_s.c
+        src/physics/humidity.c
+        src/physics/IcaoStdAtmos.cc
+        src/physics/lifted_index.c
+        src/physics/stn_pressure.c
+        src/physics/thermo.c
+        src/physics/wind.c
+        src/vil/vil.c
+        src/vil/ZxRelation.cc
+)
+add_library(physics ${SOURCE_FILES})

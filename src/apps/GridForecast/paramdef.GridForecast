@@ -1,0 +1,527 @@
+/*********************************************************
+ * parameter definitions for GridForecast
+ *
+ * Mike Dixon, RAP, NCXAR, Boulder, CO, USA, 80307-3000
+ *
+ * April 1998
+ */
+
+commentdef
+{
+  p_header = "GridForecast makes a forecast using a gridded field, such as radar reflectivity, and a field of U/V velocity values. Input and output data are both in MDV format.";
+}
+
+
+typedef enum
+{
+  DEBUG_OFF,
+  DEBUG_WARNINGS,
+  DEBUG_NORM,
+  DEBUG_VERBOSE
+} debug_t;
+
+paramdef enum debug_t
+{
+  p_default = DEBUG_OFF;
+  p_descr = "Debug option";
+  p_help = "If set, debug messages will be printed with the appropriate "
+           "level of detail.";
+} debug;
+
+paramdef string
+{
+  p_default = "Test";
+  p_descr = "Process instance";
+  p_help = "Used for registration with procmap.";
+} instance;
+
+
+/******************
+ * operational mode
+ */
+
+commentdef
+{
+  p_text = "Operational mode";
+}
+
+typedef enum
+{
+  ARCHIVE,
+  REALTIME,
+  SPEC_FCAST_REALTIME,
+  LATEST_DATA,
+  TIME_LIST,
+  MULTIPLE_URL
+} mode_t;
+
+paramdef enum mode_t
+{
+  p_default = ARCHIVE;
+  p_descr = "Operation mode";
+  p_help =  "In REALTIME mode, the analysis is performed for each "
+             "volume scan as it becomes available. Triggering off motion file\n "
+	     "In SPEC_FCAST_REALTIME mode, the program waits for a new "
+             "input file that is a forecast file with the specified forecast "
+             "lead time.\n "
+             "In ARCHIVE mode, the file list is obtained from the command line.\n "
+             "In LATEST_DATA mode, the program waits for new data from the "
+             "MDV location specified by the latest_data_trigger parameter.\n "
+             "In TIME_LIST mode, the program operates on archive data as "
+             "specified in the time_list_trigger parameter.\n "
+             "In MULTIPLE_URL mode, the program will not run until data "
+             "is available for all of the given URLs. "
+             "This is a realtime mode. "
+             "The parameters for this mode are given in the "
+             "multiple_url_trigger.";
+} mode;
+
+paramdef long
+{
+  p_min = 0;
+  p_default = 300;
+  p_descr = "Max age of input data";
+  p_help = "For realtime only - max age of input data for it to be valid";
+} max_realtime_valid_age;
+
+
+/***********************************************************************
+ * Process triggering.
+ */
+
+commentdef
+{
+  p_header = "PROCESS TRIGGERING PARAMETERS";
+  p_text = "Parameters describing the process triggering.";
+};
+
+paramdef string
+{
+  p_descr = "URL for triggering in latest data mode";
+  p_default = "mdvp:://localhost::mdv/derived_ruc";
+} latest_data_trigger;
+
+typedef struct
+{
+  string url;
+  string start_time;
+  string end_time;
+} time_list_trigger_t;
+
+paramdef struct time_list_trigger_t
+{
+  p_descr = "Trigger information used when using the TIME_LIST trigger";
+  p_help = "url specifies the triggering url.\n"
+           "start_time specifies the archive start time in any format "
+           "recognized by the DateTime class.\n"
+           "end_time specifies the archive end time in any format "
+           "recognized by the DateTime class.";
+  p_default = { "mdvp:://localhost::mdv/derived_ruc",
+                 "2001/1/1 00:00:00",
+                "2002/1/2 00:00:00" };
+} time_list_trigger;
+
+paramdef string
+{
+  p_descr = "List of URLs for triggering in latest data mode";
+  p_default = { "mdvp:://localhost::mdv/derived_ruc" };
+} multiple_url_trigger[];
+
+typedef struct
+{
+  int lead_time_secs;
+  boolean use_gen_time;
+} fcast_lead_time_t;
+
+paramdef struct fcast_lead_time_t {
+  p_default = { 0, false };
+  p_descr = "Forecast lead time information for forecast "
+            "files to be processed.";
+  p_help = "Used only if mode is set to SPEC_FCAST_REALTIME.";
+} fcast_lead_time;
+
+/***************
+ * motion data
+ */
+
+commentdef
+{
+  p_text = "Motion data";
+}
+
+paramdef string
+{
+  p_default = "mdvp:://localhost::directory";
+  p_descr = "URL for grid files for U and V motion data.";
+  p_help = "The program triggers off files in this directory. "
+           "It matches up an image file with the motion file and "
+           "produces a forecast for the image.";
+} motion_grid_url;
+
+paramdef double
+{
+  p_default = 5.0;
+  p_descr = "Vector spacing for forecast (km).";
+  p_help = "This is the ideal vector spacing - "
+           "the actual will depend on the motion file grid. "
+           "Vectors are extracted from the grid at this spacing in x and y.";
+} vector_spacing;
+
+paramdef double
+{
+  p_default = 25.0;
+  p_descr = "Smoothing radius (km).";
+  p_help = "The influence of each sampled vector is felt out to the "
+           "smoothing radius. "
+           "The weight placed on the vector value at any given point "
+           "within the smoothing radius is inversely proportional to the "
+           "distance of the point from the vector.";
+} smoothing_radius;
+
+paramdef long
+{
+  p_default = 0;
+  p_descr = "Number of U field (0-based).";
+  p_help = "The field number for the U velocity component.";
+} u_field_num;
+
+paramdef boolean
+{
+  p_descr = "Option to use field name instead of field number.\n";
+  p_default = FALSE;
+} use_u_field_name;
+
+paramdef string
+{
+  p_default = "U_comp";
+  p_descr = "The field name for the U velocity component.";
+} u_field_name;
+
+paramdef double
+{
+  p_default = 1.0;
+  p_descr = "Ht of U plane (km).";
+  p_help = "The plane height for the U velocity component. "
+           "The plane closest to this height will be used";
+} u_plane_ht;
+
+paramdef long
+{
+  p_default = 1;
+  p_descr = "Number of V field (0-based).";
+  p_help = "The field number for the V velocity component.";
+} v_field_num;
+
+paramdef boolean
+{
+  p_descr = "Option to use field name instead of field number.\n";
+  p_default = FALSE;
+} use_v_field_name;
+
+paramdef string
+{
+  p_default = "V_comp";
+  p_descr = "The field name for the V velocity component.";
+} v_field_name;
+
+paramdef double
+{
+  p_default = 1.0;
+  p_descr = "Ht of V plane (km).";
+  p_help = "The plane height for the V velocity component. "
+           "The plane closest to this height will be used";
+} v_plane_ht;
+
+paramdef long
+{
+  p_descr = "Time margin (secs).";
+  p_help = "Margin around image grid file time for finding motion grid.";
+  p_default = 180;
+} vector_time_margin;
+
+/************
+ * image data
+ */
+
+commentdef
+{
+  p_text = "Image data";
+}
+
+paramdef string
+{
+  p_default = "mdvp:://localhost::directory";
+  p_descr = "Image grid data directory.";
+  p_help = "The program takes an image from this directory and "
+           "creates a forecast using the U and V velocity components "
+           "from the motion file. "
+           "The image file used is that closest in time before "
+           "the motion grid.";
+} image_grid_url;
+
+paramdef long
+{
+  p_default = 0;
+  p_descr = "Image field number";
+  p_help = "Field number of image data in grid (0-based)";
+} image_field_num;
+
+paramdef boolean
+{
+  p_descr = "Option to use field name instead of field number.\n";
+  p_default = FALSE;
+} use_image_field_name;
+
+paramdef string
+{
+  p_default = "dbz";
+  p_descr = "Image field name.";
+  p_help = "Field name of image data in grid";
+} image_field_name;
+
+paramdef double
+{
+  p_default = 0;
+  p_descr = "Image plane height (km MSL).";
+  p_help = "Plane height to the image data in grid. "
+           "The plane closest to this height will be used. "
+           "Use -1 to use composite (column-max) data.";
+} image_plane_ht;
+
+paramdef boolean
+{
+  p_descr = "Flag indicating whether to remap the image data on input.";
+  p_help = "If true, the image field will be remapped to the given "
+           "projection on input and the output grid will also match this "
+           "projection. "
+           "If false, the image field will not be remapped on input and "
+           "the output grid will match the projection of the image field.\n "
+           "NOTE: All other inputs will be remapped to match the image grid.";
+  p_default = FALSE;
+} remap_xy;
+
+typedef enum
+{
+  LATLON,
+  LAMBERT_CONFORMAL2,
+  FLAT
+} proj_type_t;
+
+typedef struct
+{
+  proj_type_t proj_type;
+  double minx;
+  double miny;
+  double dx;
+  double dy;
+  long nx;
+  long ny;
+  double rotation;
+  double origin_lat;
+  double origin_lon;
+  double lat1;
+  double lat2;
+} proj_params_t;
+
+paramdef struct proj_params_t
+{
+  p_descr = "Input/output projection information";
+  p_help = "If remap_xy is TRUE, then the image data will be remapped to this projection on "
+           "input and the output will use this projection.\n"
+           "The rotation is used for FLAT projections only, "
+           "the origin_lat and origin_lon are used for FLAT and "
+           "LAMBERT_CONFORMAL2 projections only, and the "
+           "lat1 and lat2 are used for LAMBERT_CONFORMAL2 projections only.";
+} proj_params;
+
+paramdef double
+{
+  p_default = 0.0;
+  p_descr = "Min value for image data.";
+  p_help = "Only include image data above this value in the forecast.";
+} image_val_min;
+
+paramdef double
+{
+  p_default = 255.0;
+  p_descr = "Max value for image data.";
+  p_help = "Only include image data below this value in the forecast.";
+} image_val_max;
+
+paramdef long
+{
+  p_descr = "Time margin (secs).";
+  p_help = "Margin around motion grid file time for finding image grid.";
+  p_default = 180;
+} image_time_margin;
+
+/*****************
+ * forecast output
+ */
+
+commentdef
+{
+  p_text = "Forecast output";
+}
+
+typedef struct
+{
+  boolean apply;
+  string output_url;
+  long starting_lead_sec;
+  long increment_sec;
+  int number_of_increments;
+  boolean advect_vectors;
+} incremental_forecast_t;
+
+paramdef struct incremental_forecast_t
+{
+  p_descr = "Option to do an incremental forecast instead of "
+            "the default where each lead time is independent "
+            "of the other lead times.";
+  p_help = "If apply is set to TRUE, then the incremental foreacst "
+           "is preformed and the forecast_output parameters below will be "
+           "ignored. An incremental forecast uses the previous forecast to "
+           "do the next forecast. It starts with the start_lead_sec number "
+           "of seconds and adds increment_sec for each number_of_increments. "
+           "The start_lead_sec is considered to be the first increment. "
+           "If the advect_vectors is TRUE, the vectors will be advected along "
+           "with the grids.";
+  p_default = {false, "mdvp:://localhost::output", 0, 1800, 9, false};
+} incremental_forecast;
+
+typedef struct
+{
+  boolean apply;
+  string mask_url;
+  string mask_field_name;
+  double mask_plane_ht;
+  double mask_min_value;
+  double mask_max_value;
+  double forecast_min_value;
+  double forecast_max_value;
+  double forecast_replacement_value;
+} mask_forecast_t;
+
+paramdef struct mask_forecast_t
+{
+  p_descr = "Option to apply a mask to the forecast data prior to output.";
+  p_help = "In areas where the mask field is greater than or equal to the mask_min_value, "
+           "and less than or equal to the mask_max_value, and the forecast field value is greater "
+           "than or equal to the forecast_min_value, and less than or equal to the forecast_max_value, "
+           "replace the forecast field value with the forecast_replacement value.\n "
+           "The missing data value of the mask will be applied to areas where the mask and the forecast "
+           "have missing data values.\n "
+           "The mask_plane_ht is the plane height to use in the mask data grid. The plane closest to "
+           "this height will be used. Use -1 for composite (column-max) data.";
+  p_default = {false, "mdvp:://localhost::mask", "NEDMask", 0, -100, -98, -100, 0, 0};
+} mask_forecast;
+
+typedef struct
+{
+  string url;
+  long lead_time;
+} forecast_output_t;
+
+paramdef struct forecast_output_t
+{
+  p_descr = "Forecast output parameters.";
+  p_help = "For each forecast lead time (secs) you must provide "
+           "an output directory. These parameters are only used "
+           "if incremental_forecast apply is set to FALSE.";
+} forecast_output[];
+
+paramdef boolean
+{
+  p_descr = "Option to write data to forcast directory structure.";
+  p_default = false;
+} write_to_forecast_directory;
+
+typedef enum {
+  ENCODING_INT8 =      1,
+  ENCODING_INT16 =     2,
+  ENCODING_FLOAT32 =   5
+} encoding_type_t;
+
+paramdef enum encoding_type_t {
+  p_default = ENCODING_FLOAT32;
+  p_descr = "Set output encoding type.";
+  p_help = "Defaults to FLOAT32 for backward compatibility.";
+} encoding_type;
+
+typedef enum {
+  COMPRESSION_NONE =  0,
+  COMPRESSION_RLE =   1,
+  COMPRESSION_LZO =   2,
+  COMPRESSION_ZLIB =  3,
+  COMPRESSION_BZIP =  4,
+  COMPRESSION_GZIP =  5
+} compression_type_t;
+
+paramdef enum compression_type_t {
+  p_default = COMPRESSION_GZIP;
+  p_descr = "Set output compression type.";
+  p_help = "See <toolsa/compress> for details on the compression types. "
+           "Defaults to GZIP for backward compatibility.";
+} compression_type;
+
+typedef enum {
+  SCALING_NONE =       0,
+  SCALING_ROUNDED =    1,
+  SCALING_INTEGRAL =   2,
+  SCALING_DYNAMIC =    3,
+  SCALING_SPECIFIED =  4
+} scaling_type_t;
+
+paramdef enum scaling_type_t {
+  p_default = SCALING_NONE;
+  p_descr = "Set output scaling type.";
+  p_help = "This is only relevant when converting from float32 to int8 or "
+           "int16. Defaults to NONE for backward compatibility.";
+} scaling_type;
+
+paramdef float {
+  p_default = 1.0;
+  p_descr = "Output scaling scale.";
+  p_help = "For SCALING_SPECIFIED only.";
+} scale;
+
+paramdef float {
+  p_default = 0.0;
+  p_descr = "Output scaling bias.";
+  p_help = "For SCALING_SPECIFIED only.";
+} bias;
+
+/************************
+ * optional motion output
+ */
+
+commentdef
+{
+  p_text = "Optional motion output";
+}
+
+paramdef boolean
+{
+  p_descr = "Option to output motion grid files for debugging.\n";
+  p_default = FALSE;
+} write_motion_files;
+
+paramdef boolean
+{
+  p_descr = "Option to output the motion grid to the forecast output url "
+            "when write_motion_files is set to TRUE.";
+  p_help  = "If FALSE, files will write to output_motion_url if "
+             "write_motion_files is set to TRUE";
+  p_default = FALSE;
+} write_motion_to_forecast_files;
+
+paramdef string
+{
+  p_default = "none";
+  p_descr = "Motion grid data URL.";
+  p_help = "If 'write_motion_files' is TRUE, motion files will be "
+           "written to this URL but only if write_motion_to_forecast_files "
+           "is set to FALSE";
+} output_motion_url;
+

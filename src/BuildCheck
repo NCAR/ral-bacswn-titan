@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+
+cd $SCRIPT_DIR
+FULL_PATH=`pwd`
+
+source ../control/${PROJ}_env
+
+BUILD_DIR=$FULL_PATH
+INSTALL_DIR=$FULL_PATH/..
+
+cd $INSTALL_DIR/bin
+
+APP_COUNTER=0
+MISSING_COUNTER=0
+
+source ../control/${PROJ}_applist
+for app in ${apps[@]}
+do
+    APP_COUNTER=$[$APP_COUNTER +1]
+    app_name=`echo $app | cut -d'/' -f3`
+    [ ! -e $app_name ] && echo "Missing: $app_name" && MISSING_COUNTER=$[$MISSING_COUNTER +1]
+done
+
+echo "Number of apps: $APP_COUNTER"
+echo "Number of missing apps: $MISSING_COUNTER"
+echo
+
+exit

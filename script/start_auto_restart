@@ -1,0 +1,23 @@
+#!/bin/bash
+# Script to start the auto_restarter to keep Project system running
+# Identifies procfile in $PROJ_CONTROL_DIR as either:
+# ${PROJ}_pro_list_${SHOST} or ${PROJ}_pro_list
+
+proclist="${PROJ}_proc_list"
+if [ ! -z "$SHOST" ]; then
+    [ -f "$PROJ_CONTROL_DIR/${PROJ}_proc_list_${SHOST}" ] && proclist="${PROJ}_proc_list_${SHOST}"
+fi
+
+if [ ! -f "$PROJ_CONTROL_DIR/${proclist}" ]; then
+    echo "ERROR: Cannot find $proclist in : $PROJ_CONTROL_DIR"
+    exit 1
+fi
+
+running "auto_restart --proc_list $PROJ_CONTROL_DIR/$proclist"
+
+if [[ $? == 1 ]]; then
+    echo "Starting auto_restart --proc_list $PROJ_CONTROL_DIR/$proclist"
+    auto_restart --proc_list $PROJ_CONTROL_DIR/$proclist \
+    --map_host $PROCMAP_HOST --sleep 120 --uptime_min 240 --ignoreoutlog |& \
+    LogFilter -d $ERRORS_LOG_DIR -p auto_restart -i $PROJ &
+fi

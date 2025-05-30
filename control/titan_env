@@ -1,0 +1,188 @@
+##################################################################
+#
+# TITAN PROJECT CORE VARIABLES
+#
+##################################################################
+#
+export SHOST="${HOSTNAME%%.*}"
+#
+export RAP_DATA_DIR=$TOP_DIR
+export PROJ_DATA_DIR=$RAP_DATA_DIR/work/$PROJ
+#
+export RAP_PROJ_DIR=$TOP_DIR/apps/$PROJ
+#
+export OUTPUT_DIR=$TOP_DIR/output
+export INPUT_DIR=$TOP_DIR/input
+#
+export PROJ_CONFIG_DIR=$RAP_PROJ_DIR/config
+export PROJ_CONTROL_DIR=$RAP_PROJ_DIR/control
+export PROJ_DATAFILE_DIR=$PROJ_CONFIG_DIR/data_files
+# 
+export LOG_DIR=$RAP_DATA_DIR/work/logs/$PROJ
+export ERRORS_LOG_DIR=$LOG_DIR
+#
+export PATH="$RAP_PROJ_DIR/bin:$RAP_PROJ_DIR/script:$RAP_PROJ_DIR/third_party_libs/bin:/usr/bin:/bin"
+#
+export PROJ_OUTPUT_DIR=$OUTPUT_DIR/$PROJ
+#
+export PROJECT=$PROJ
+export PROJ_DIR=$RAP_PROJ_DIR
+export CTH_HOME=$RAP_PROJ_DIR
+export DATA_PARAMS=$PROJ_DATAFILE_DIR
+export PROC_PARAMS=$PROJ_CONFIG_DIR
+#
+export GRID_DATA_TYPE=mdvNc
+export GRID_DATA_DIR=$PROJ_DATA_DIR/$GRID_DATA_TYPE
+export ASCII_DATA_DIR=$PROJ_DATA_DIR/ascii
+export SPDB_DATA_DIR=$PROJ_DATA_DIR/spdb
+export ARCHIVE_DATA_DIR=$PROJ_DATA_DIR/archive
+export ARCHIVE_GRID_DATA_DIR=$ARCHIVE_DATA_DIR/$PROJ/$GRID_DATA_TYPE
+export DATA_DIR=$RAP_DATA_DIR
+#
+export SYSVIEW_HOST="localhost"
+export SYSVIEW_OUTPUT_DIR=$PROJ_DATA_DIR/www_content/sysview
+export SYSVIEW_GRID_DATA_DIR=work/$PROJ/$GRID_DATA_TYPE
+export SYSVIEW_SPDB_DATA_DIR=work/$PROJ/spdb
+export SYSVIEW_OUTPUT_DATA_DIR=output/$PROJ
+export SYSVIEW_PROCMAP_PORT=5433
+export SYSVIEW_DATAMAP_PORT=5434
+export MAIN_GRID_DATA_TYPE=nc
+#
+export PROCMAP_HOST=localhost
+export SERVMAP_HOST=localhost
+export DATA_MAPPER_ACTIVE=TRUE
+export DATA_MAPPER_DEBUG=TRUE
+export LDATA_FMQ_ACTIVE=TRUE
+#
+# export MDV_WRITE_FORMAT=FORMAT_MDV
+export MDV_WRITE_FORMAT=FORMAT_NCF
+export MDV_NCF_COMPRESSION_LEVEL=4
+export MDV_NCF_COMPRESS=TRUE
+export MDV2NETCDF_WRITE_LATLON_ARRAYS=TRUE
+export MDV_WRITE_USING_EXTENDED_PATHS=TRUE
+#
+# The BASE PORT may be reset by setting the environment variable: DS_BASE_PORT
+# All ports will be reset by the difference between DS_BASE_PORT and
+# the default base port of 5430
+#
+export DS_BASE_PORT=5430
+export DS_PROXYSERVER_PORT=5442
+#
+export SAT_MERGE_SECS=3600
+export SAT_MERGE_INTERVAL=600
+#
+# debug level
+#  Options:
+#    DEBUG_OFF
+#    DEBUG_NORM
+#    DEBUG_VERBOSE
+#
+export DEBUG_LEVEL=DEBUG_OFF
+#
+# debug flag
+#  Options:
+#    TRUE
+#    FALSE
+export DEBUG_FLAG=FALSE
+#
+#
+export PERL5LIB=$PROJ_DIR/lib/perl5
+#
+
+##################################################################
+
+
+##################################################################
+#
+# INCOMING DATA LOCATIONS	
+#
+##################################################################
+#
+export INPUT_RADAR_DIR=$INPUT_DIR/radar
+#
+##################################################################
+
+
+##################################################################
+#
+# GRID DEFINITIONS
+#
+##################################################################
+#
+if [ -f "$CONTROL_PARAMS/GRID_ENV" ]
+then
+    source $CONTROL_PARAMS/GRID_ENV
+fi
+#
+##################################################################
+
+
+##################################################################
+#
+# ALIASES
+#
+##################################################################
+alias proj="cd $PROJ_DIR"
+alias control="cd $PROJ_CONTROL_DIR"
+alias params="cd $PROJ_CONFIG_DIR"
+alias scripts="cd $PROJ_DIR/script"
+alias mdv="cd $PROJ_DATA_DIR/mdv"
+alias nc="cd $PROJ_DATA_DIR/mdvNc"
+alias spdb="cd $PROJ_DATA_DIR/spdb"
+alias logs="cd $ERRORS_LOG_DIR"
+alias data="cd $PROJ_DATA_DIR"
+alias pp="print_procmap -up -status -hb"
+alias pd="PrintDataMap -latest"
+##################################################################
+
+##################################################################
+#
+# BUILD VARIABLES
+#
+##################################################################
+export THIRD_PARTY_LIBS_LOC=$RAP_PROJ_DIR/third_party_libs
+#
+export HDF5_LOC=$THIRD_PARTY_LIBS_LOC
+export NCDF4_LOC=$THIRD_PARTY_LIBS_LOC
+export JASPER_LOC=$THIRD_PARTY_LIBS_LOC
+export ZLIB_LOC=$THIRD_PARTY_LIBS_LOC
+export SZIP_LOC=$THIRD_PARTY_LIBS_LOC
+export BZIP2_LOC=$THIRD_PARTY_LIBS_LOC
+export FFTW_LOC=$THIRD_PARTY_LIBS_LOC
+#
+export LD_LIBRARY_PATH=$HDF5_LOC/lib:$NCDF4_LOC/lib:$JASPER_LOC/lib:$ZLIB_LOC/lib:$SZIP_LOC/lib:$BZIP2_LOC/lib:$FFTW_LOC/lib
+#
+# Third party libs version to check out
+#
+export CURL_VERSION=dace891e3
+export ZLIB_VERSION=v1.3
+export BZIP2_VERSION=1ea1ac1
+export HDF5_VERSION=hdf5-1_8_20
+export NETCDF_C_VERSION=8d7916ced
+export NETCDF_CXX4_VERSION=v4.3.0
+export NETCDF_CXX_VERSION=4.2
+export JASPER_VERSION=version-1.900.1
+export LIBPNG_VERSION=v1.6.40
+export FFTW3_VERSION=fftw-3.3.9
+export UDUNITS2_VERSION=c83da98
+export NCO_VERSION=5.2.4
+#
+export HOST_OS=LINUX_CX14
+export CTH_BUILD_DIR=$RAP_PROJ_DIR/src
+export CTH_INSTALL_DIR=$RAP_PROJ_DIR
+#
+export RAP_MAKE_INC_DIR=$CTH_BUILD_DIR/make_include
+export RAP_INC_DIR=$CTH_INSTALL_DIR/include
+export RAP_LIB_DIR=$CTH_INSTALL_DIR/lib
+export RAP_BIN_DIR=$CTH_INSTALL_DIR/bin
+export RAP_SHARED_INC_DIR=$CTH_INSTALL_DIR/include
+export RAP_SHARED_LIB_DIR=$CTH_INSTALL_DIR/lib
+export RAP_SHARED_BIN_DIR=$CTH_INSTALL_DIR/bin
+
+export GCC_WARNINGS=-Wall
+
+#export HOST_OS=LINUX_LROSE
+export LROSE_INSTALL_DIR=$HOME/lrose
+export LROSE_CORE_DIR=$HOME/git/lrose-core
+export PATH="$PATH:$LROSE_INSTALL_DIR/bin"
+alias qmake="/usr/bin/qmake6"

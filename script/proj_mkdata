@@ -1,0 +1,28 @@
+#!/bin/bash
+# Script to install any needed Project files into data directories
+# Identifies datalist file in $PROJ_CONTROL_DIR as either:
+# ${PROJ}_datalist_${SHOST} or ${PROJ}_datalist
+
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+
+cd $SCRIPT_DIR
+source ../control/${PROJ}_bashrc
+
+datalist="${PROJ}_datalist"
+if [ ! -z "$SHOST" ]; then
+    [ -f "$PROJ_CONTROL_DIR/${PROJ}_datalist_${SHOST}" ] && proclist="${PROJ}_datalist_${SHOST}"
+fi
+
+if [ ! -f "$PROJ_CONTROL_DIR/${datalist}" ]; then
+    echo "ERROR: Cannot find $datalist file in : $PROJ_CONTROL_DIR"
+    exit 1
+fi
+
+if [ ! -d "$PROJ_CONFIG_DIR/data_files" ]; then
+    echo "ERROR: Cannot find data_files directory in : $PROJ_CONFIG_DIR"
+    exit 1
+fi
+
+echo "setupRapDataDirs.py -f $PROJ_CONTROL_DIR/${datalist} -p $PROJ_CONFIG_DIR/data_files"
+setupRapDataDirs.py -f $PROJ_CONTROL_DIR/${datalist} -p $PROJ_CONFIG_DIR/data_files

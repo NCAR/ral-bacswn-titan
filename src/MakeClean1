@@ -1,0 +1,46 @@
+#!/bin/bash
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+
+cd $SCRIPT_DIR
+FULL_PATH=`pwd`
+
+source ../control/${PROJ}_env
+
+BUILD_DIR=$FULL_PATH
+INSTALL_DIR=$FULL_PATH/..
+
+echo "BUILD_DIR:" $BUILD_DIR
+echo "INSTALL_DIR:" $INSTALL_DIR
+    
+cd $BUILD_DIR 
+
+PATH=$PATH:$INSTALL_DIR/bin
+
+HOST_OS=LINUX_CX14
+
+#
+# set up for the build.
+#
+RAP_MAKE_INC_DIR=$BUILD_DIR/make_include
+RAP_INC_DIR=$INSTALL_DIR/include
+RAP_LIB_DIR=$INSTALL_DIR/lib
+RAP_BIN_DIR=$INSTALL_DIR/bin
+RAP_SHARED_INC_DIR=$INSTALL_DIR/include
+RAP_SHARED_LIB_DIR=$INSTALL_DIR/lib
+RAP_SHARED_BIN_DIR=$INSTALL_DIR/bin
+
+dir=$1
+shift
+
+#
+# Make the requested app/lib
+#
+if [[ -d $dir ]]; then
+    cd $dir
+    make clean_all
+else
+    echo "Directory: $dir not found"
+fi
+
+

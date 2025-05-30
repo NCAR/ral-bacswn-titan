@@ -1,0 +1,5 @@
+test_bzip
+test_gzip
+test_lzo
+test_rle
+test_zlib

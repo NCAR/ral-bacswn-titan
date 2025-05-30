@@ -1,0 +1,87 @@
+# *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
+# ** Copyright UCAR (c) 1992 - 2021 
+# ** University Corporation for Atmospheric Research(UCAR) 
+# ** National Center for Atmospheric Research(NCAR) 
+# ** Research Applications Laboratory(RAL) 
+# ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
+# ** 2010/10/7 16:53:3 
+# *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
+###########################################################
+#
+# Macros for LINUX 64 bit machines
+#
+# RAP,NCAR,Boulder,Colorado,80307,USA
+#
+############################################################
+
+#
+# system utilities
+#
+
+SHELL = /bin/sh
+RM = /bin/rm -f
+MV = /bin/mv -f
+CP = /bin/cp
+CP_DIR = /bin/cp -r
+MKDIR = /bin/mkdir -p
+TEST = /usr/bin/test
+PERL = /usr/bin/perl
+AWK = /usr/bin/awk
+DATE = date -u
+PWD = pwd
+
+#
+# includes
+#
+
+SYS_X_INCLUDES = -I/usr/X11/include
+
+#
+# compile
+#
+# gcc
+#
+CC := $(if $(CC),$(CC),gcc)
+SYS_CFLAGS = -D$(HOST_OS) -D_BSD_TYPES -DF_UNDERSCORE2 $(MY_CFLAGS)
+PROFILE_FLAG = -pg -O2
+DEBUG_FLAG = -g
+OPT_FLAG = -O2
+#
+# cc
+#
+SYS_CPPC_CFLAGS = $(SYS_CFLAGS) $(MY_CPPC_CFLAGS) -std=c++11
+CPPC := $(if $(CXX),$(CXX),g++)
+SYS_CPPC_INCLUDES =
+ACC = $(CC)
+
+#
+# Archiving libs
+#
+
+AR = ar
+ARFLAGS = rv
+RANLIB = na
+HAVE_RANLIB=FALSE
+
+# Locations for all the required third-party libraries
+# These need to be already compiled
+
+PNG := $(if $(PNG_LOC),$(PNG_LOC),$(PREFIX))
+HDF5 := $(if $(HDF5_LOC),$(HDF5_LOC),$(PREFIX))
+NCDF4 := $(if $(NCDF4_LOC),$(NCDF4_LOC),$(PREFIX))
+JASPER := $(if $(JASPER_LOC),$(JASPER_LOC),$(PREFIX))
+ZLIB := $(if $(ZLIB_LOC),$(ZLIB_LOC),$(PREFIX))
+SZIP := $(if $(SZIP_LOC),$(SZIP_LOC),$(PREFIX))
+BZIP := $(if $(BZIP_LOC),$(BZIP_LOC),$(PREFIX))
+FFTW := $(if $(FFTW_LOC),$(FFTW_LOC),$(PREFIX))
+
+NETCDF4_INCS=-I$(NCDF4)/include -I$(HDF5)/include -I$(ZLIB)/include -I$(BZIP)/include
+NETCDF4_LDFLAGS=-L$(NCDF4)/lib -L$(HDF5)/lib -L$(ZLIB)/lib -I$(BZIP)/lib
+NETCDF4_LIBS=-lNcxx -lnetcdf -lhdf5_hl_cpp -lhdf5_cpp -lhdf5_hl -lhdf5 -lz -lbz2
+
+COMP_INCS=-I$(ZLIB)/include -I$(BZIP)/include -I$(SZIP)/include
+COMP_LDFLAGS=-L$(ZLIB)/lib -I$(BZIP)/lib -L$(SZIP)/lib
+
+JASPER_INCLUDES = -I$(JASPER)/include
+JASPER_LDFLAGS = -L$(JASPER)/lib
+JASPER_LIBS = -ljasper

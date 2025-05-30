@@ -1,0 +1,29 @@
+#!/bin/bash
+
+libs=(
+    advect
+    contour
+    dataport
+    didss
+    dsdata
+    dsserver
+    euclid
+    Fmq
+    GoesRNc
+    grib2
+    Mdv
+    Ncxx
+    physics
+    radar
+    Radx
+    rapformats
+    rapmath
+    Spdb
+    symprod
+    tdrp
+    titan
+    toolsa
+    ConvWx
+    ConvWxIO
+    ConvWxParams
+)

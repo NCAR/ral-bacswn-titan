@@ -1,0 +1,186 @@
+Usage: PrintMdv [args as below]
+Options:
+
+  [ -h ] produce this list.
+
+  [ -32_bit_hdrs ] read using the legacy 32-bit headers
+     The default is to use the new 64-bit headers
+     Legacy servers will always return 32-bit headers
+
+  [ -all_hdrs ] only get headers
+     exactly as they exist in the file
+
+  [ -bot ] for GIS mode, start with bottom row
+     If not set, defaults to start with top row
+
+  [ -comp ] composite on read
+     This takes the maximum at any height.
+
+  [ -d, -debug ] print debug messages
+
+  [ -data ] print field data
+
+  [ -decimate ? ] set read decimation on: defaults to off
+     nxy: specify max number of grid points in plane
+
+  [ -dvi ] disable vsection interpolation
+     Use nearest-neighbor instead
+
+  [ -encoding ? ] get encoding type for data, default 'asis'
+     Options: asis, int8, int16, float32
+
+  [ -f ? ] set file path, see also -path
+
+  [ -field ? ] Specify particular field
+     Specify name or number
+     Use muptiple -field args for multiple fields
+     If not specified, all fields will be printed
+
+  [ -float ] print data as floats
+
+  [ -format ? ] Specify data format
+     Default is:         FORMAT_MDV
+     Alternatives are:   FORMAT_XML
+                         FORMAT_NCF - netCDF CF
+
+  [ -gis ] print volume in GIS mode, suitable for importing
+     by ArcGIS or similar software
+
+  [ -hdrs_also ] request headers exacltly as in files.
+     Use with -volume or -vsection.
+
+  [ -latest_mod_time ? ] specify latest valid mod time
+     No files written after this time will be considered valid.
+     Format is "YYYY MM DD HH MM SS"
+
+  [ -lead ? ] forecast lead time (secs): defaults to 0
+     mode: specified forecast
+
+  [ -linear ] force conversion to linear if data is
+     stored as logs
+
+  [ -margin ? ] time_margin (secs): defaults to 3600
+     modes: all except latest
+
+  [ -mode ? ] get mode for volume and vsection, not time_list
+     Options: latest, closest, first_before, first_after,
+              best_forecast, specified_forecast
+
+  [ -nlines_data ? ] only print out first nlines of data fields
+
+  [ -path ? ] set file path, see also -f
+
+  [ -printCanonical ] force packed format to print canonical
+     format
+
+  [ -printChunks ] print out chunks by forcing a volume to be read
+
+  [ -save ? ] save result to Mdvx file at specified URL
+     Url format is "mdvp:://host:port:dir"
+     Use with -volume or -vsection.
+
+  [ -save_no_print ? ] while saving, suppress normal print
+     See -save
+
+  [ -summary ] print short summary
+
+  [ -single_buf ] get from server as single buffer
+
+  [ -table ] print in tabular form, suitable for importing
+     into spreadsheets etc
+
+  [ -test ? ] Specify test mode
+     Specify number of retrievals for test.
+     This is used to test retrieval speed.
+
+  [ -threaded ] use threading
+     Uses DsMdvxThreaded object instead of DsMdvx object
+
+  [ -time ? ] specify search time
+     Format is "YYYY MM DD HH MM SS"
+
+  [ -timeht ] get time-height profile
+     Need to specify tlist_mode and tlist details
+
+  [ -timelist ] get timelist
+     Specify tlist_mode, and a single waypt
+
+  [ -tlist_mode ? ] set time_list mode
+     Options: valid, gen, forecast, first, last,
+              gen_plus_forecasts, valid_mult_gen,
+              closest, first_before, first_after,
+              best_forecast, specified_forecast
+     Default: valid
+     For valid, gen, gen_plus_forecasts and valid_mult_gen,
+         specify tlist_start and tlist_end
+     For forecast and specified_forecast
+         specify tlist_gen
+     For closest, first_before, first_after, 
+         best_forecast and specified_forecast,
+         specify tlist_search and tlist_margin
+     For specified_forecast, specify gen_time and
+         either search_time or lead secs
+
+  [ -tlist_start ? ] specify time_list start time
+     Format is "YYYY MM DD HH MM SS"
+
+  [ -tlist_end ? ] specify time_list end time
+     Format is "YYYY MM DD HH MM SS"
+
+  [ -tlist_gen ? ] specify time_list gen time
+     Format is "YYYY MM DD HH MM SS"
+
+  [ -tlist_search ? ] specify time_list search time
+     Format is "YYYY MM DD HH MM SS"
+
+  [ -tlist_margin ? ] specify time_list search margin (secs)
+
+  [ -tlist_also ] request time list in addition to data fields.
+     Use with -volume or -vsection.
+
+  [ -url ? ] specify url
+     Format is "mdvp:://host:port:dir"
+
+  [ -v, -verbose ] print verbose debug messages
+
+  [ -vlevel ? ] set single vlevel
+
+  [ -vlevel_lower ? ] set lower vlevel limit
+
+  [ -vlevel_upper ? ] set upper vlevel limit
+
+  [ -volume ] get volume - the default
+
+  [ -vsection ] get vsection, using waypts
+
+  [ -vtype ? ] set vlevel type
+     Options: z, pres, flevel
+     Default: not set
+
+  [ -waypt ? ] add a vert section waypt
+     Format is "lat,lon"
+     For timeht, use a single waypt
+
+  For forwarding, use this sort of syntax:
+      mdvp:://wmds.rap.ucar.edu::mdv/radar/mosaic?forward_url=http://www.rap.ucar.edu/DsServerTunnel& -mode latest
+
+
+NOTE: You do not need to use the params option (see below).
+      If no params are specified, you deal with the whole file.
+
+TDRP args: [options as below]
+   [ -params/--params path ] specify params file path
+   [ -check_params/--check_params] check which params are not set
+   [ -print_params/--print_params [mode]] print parameters
+     using following modes, default mode is 'norm'
+       short:   main comments only, no help or descr
+                structs and arrays on a single line
+       norm:    short + descriptions and help
+       long:    norm  + arrays and structs expanded
+       verbose: long  + private params included
+       short_expand:   short with env vars expanded
+       norm_expand:    norm with env vars expanded
+       long_expand:    long with env vars expanded
+       verbose_expand: verbose with env vars expanded
+   [ -tdrp_debug] debugging prints for tdrp
+   [ -tdrp_usage] print this usage

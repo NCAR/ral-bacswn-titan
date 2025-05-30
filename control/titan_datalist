@@ -1,0 +1,15 @@
+####################################################################
+#
+# Install server parameter files used in the processing.
+#
+####################################################################
+#
+# directories to make
+#
+$LOG_DIR                                           local
+#
+$GRID_DATA_DIR                                     local   
+#
+# Server files for forecast statistics
+#
+####################################################################

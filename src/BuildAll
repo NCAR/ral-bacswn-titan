@@ -1,0 +1,152 @@
+#!/bin/bash
+
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+
+cd $SCRIPT_DIR
+FULL_PATH=`pwd`
+
+source ../control/${PROJ}_env
+
+#################################
+## Check for g++ and Make      ##
+#################################
+#
+WHERE=/usr/bin/where
+WHICH=/usr/bin/which
+OS=`uname`
+
+if [ "$OS" != "Linux" ]; then
+    echo "ERROR: Make setup cannot run on a non linux machine"
+    exit 1
+fi
+
+#################################
+## Check for g++ and Make ##
+#################################
+#
+
+MAKE_PATH=`$WHICH make 2>/dev/null`
+if [ -z $MAKE_PATH ]; then
+    echo "Could not find make, please install."
+    exit 1
+fi
+if [ ! -x $MAKE_PATH ]; then
+    echo "Could not find make at $MAKE_PATH"
+    echo "please install."
+    exit 1
+fi
+$MAKE_PATH -v 2>&1 | grep -qe "GNU Make \([4-9].[0-9]\)\|\(3.[8-9]\)"
+if [ $? -ne 0 ]; then
+   MAKEVERSION=`$MAKE_PATH -v 2>&1 | grep "GNU Make"`
+   echo "GNU Make 3.8 or above is required"
+   echo "found $MAKEVERSION"
+   exit 1
+fi
+###################################
+
+###################################
+## Check for 3rd party libraries ##
+###################################
+#
+###################################
+
+BUILD_DIR=$FULL_PATH
+INSTALL_DIR=$FULL_PATH/..
+
+echo "BUILD_DIR:" $BUILD_DIR
+echo "INSTALL_DIR:" $INSTALL_DIR
+    
+cd $BUILD_DIR 
+
+PATH=$PATH:$INSTALL_DIR/bin
+
+#
+# set up for the build.
+#
+RAP_MAKE_INC_DIR=$BUILD_DIR/make_include
+RAP_INC_DIR=$INSTALL_DIR/include
+RAP_LIB_DIR=$INSTALL_DIR/lib
+RAP_BIN_DIR=$INSTALL_DIR/bin
+RAP_SHARED_INC_DIR=$THIRD_PARTY_LIBS_LOC/include
+RAP_SHARED_LIB_DIR=$THIRD_PARTY_LIBS_LOC/lib
+RAP_SHARED_BIN_DIR=$INSTALL_DIR/bin
+#
+# Make directories then start build.
+#
+for dir in $RAP_BIN_DIR $RAP_LIB_DIR $RAP_INC_DIR
+do
+    [ ! -d "$dir" ] && echo "mkdir -p $dir" && mkdir -p $dir
+done
+
+#
+# Start building.
+#
+# Make sure to start with a clean bulid
+#
+./MakeCleanAll
+#
+# Make the inc dir to get os_config.h in place.
+#
+[ -d $BUILD_DIR/incs ] && cd $BUILD_DIR/incs && make install
+[ ! -d $BUILD_DIR/incs ] && echo "ERROR: $BUILD_DIR/incs does not exist" && exit 1
+
+#
+# Special case - build the tdrp lib and apps first, so
+# that tdrp_gen gets built - we need this to build all the apps, and
+# at least one of the other libs.
+#
+
+[ -e $BUILD_DIR/libs/tdrp ] && cd $BUILD_DIR/libs/tdrp && make install
+[ ! -e $BUILD_DIR/libs/tdrp ] && echo "ERROR: Missing $BUILD_DIR/libs/tdrp" && exit 1
+
+[ -e $BUILD_DIR/apps/tdrp_gen ] && cd $BUILD_DIR/apps/tdrp_gen && make install
+[ ! -e $BUILD_DIR/apps/tdrp_gen ] && echo "ERROR: Missing $BUILD_DIR/apps/tdrp_gen" && exit 1
+
+#
+# Make the libraries.
+#
+cd $BUILD_DIR
+
+source ../control/${PROJ}_liblist
+for lib in ${libs[@]}
+do
+    cd $BUILD_DIR/libs
+    if [[ -e $lib ]]; then
+	cd $lib
+	make install_include
+    else
+	echo WARNING: $BUILD_DIR/libs/$lib does note exist
+    fi
+done
+#
+for lib in ${libs[@]}
+do
+    cd $BUILD_DIR/libs
+    if [[ -e $lib ]]; then
+	cd $lib
+	make opt install
+    else
+	echo WARNING: $BUILD_DIR/libs/$lib does note exist
+    fi
+done
+
+#
+# Make the apps
+#
+cd $BUILD_DIR
+
+source ../control/${PROJ}_applist
+for app in ${apps[@]}
+do
+    if [[ -e $BUILD_DIR/apps/$app ]]; then
+	cd $BUILD_DIR/apps/$app
+	make -k opt install
+    else
+	echo WARNING: $BUILD_DIR/apps/$app does note exist
+    fi
+done
+echo
+echo "BUILD COMPLETED"
+echo
+exit

@@ -1,0 +1,52 @@
+Usage: DataMapper [options as below]
+options:
+       [ --, -h, -help, -man ] produce this list.
+       ----- debugging ----------------------------------
+       [ -debug ] print debug messages.
+       [ -verbose ] print verbose debug messages.
+       ----- running ------------------------------------
+       [ -instance ? ] override instance. Default 'primary'.
+       [ -noThreads ] force single-threaded operation.
+       ----- deleting ------------------------------------
+       [ -clean ] clean out store on startup.
+                  Note: overrides delete.
+       [ -delete datatype dir host ] delete specified entry.
+         Use 'all' as a wildcard for datatype, dir or host.
+       ----- saving state -------------------------------
+       [ -save ] save state (default)
+       [ -noSave ] do not save state
+       [ -savePath ? ] path for saving state to file
+         Default is '/tmp/dmap_state_table'
+       [ -saveSecs ? ] how often to save state, secs, default 10
+         Default is 10
+       ----- purging old entries ------------------------
+       [ -purge ] purge old entries (default)
+       [ -noPurge ] do not purge old entries
+       [ -purgeAge ? ] age in days for purging, default 1.0
+       ----- adding data types ---------------------------
+       [ -addType ? ] add a data type to the list of valid types
+         Default list is: raw, mdv, spdb, titan, www, www_content
+                          grib, sim, simulate, md, nc
+
+NOTE: this is the simplified version of the DataMapper.
+      This only uses TCP/IP for message passing.
+      The input FMQ is no longer used.
+      Fowarding of messages has been disabled.
+
+TDRP args: [options as below]
+   [ -params/--params path ] specify params file path
+   [ -check_params/--check_params] check which params are not set
+   [ -print_params/--print_params [mode]] print parameters
+     using following modes, default mode is 'norm'
+       short:   main comments only, no help or descriptions
+                structs and arrays on a single line
+       norm:    short + descriptions and help
+       long:    norm  + arrays and structs expanded
+       verbose: long  + private params included
+       short_expand:   short with env vars expanded
+       norm_expand:    norm with env vars expanded
+       long_expand:    long with env vars expanded
+       verbose_expand: verbose with env vars expanded
+   [ -tdrp_debug] debugging prints for tdrp
+   [ -tdrp_usage] print this usage
+
