@@ -11,7 +11,7 @@
 # debugging
 
 Rview.x_sync: false
-Rview.debug: true
+Rview.debug: false
 Rview.malloc_debug_level: 0
 
 ##########
