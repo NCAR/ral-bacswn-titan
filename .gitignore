@@ -1,0 +1,10 @@
+/bin
+/include
+/lib
+/third_party_libs
+*.o
+*.a
+*~
+*.archive
+*.bak
+*.log

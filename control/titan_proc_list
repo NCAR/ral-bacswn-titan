@@ -9,6 +9,7 @@ DataMapper             primary                         start_inst(no-params)    
 DsServerMgr            primary                         start_inst(no-params)        snuff_inst      localhost
 #Janitor                titan_input                     start_inst()                 snuff_inst      localhost
 Janitor                titan_work                      start_inst()                 snuff_inst      localhost
+Janitor                titan_logs                      start_inst()                 snuff_inst      localhost
 
 ##################################################
 #
