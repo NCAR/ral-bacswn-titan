@@ -1,0 +1,35 @@
+Usage: MdvMerge2 [args as below]
+options:
+  [ --, -h, -help, -man ] produce this list.
+  [ -debug ] print debug messages
+  [ -end "yyyy mm dd hh mm ss"] end time
+    ARCHIVE mode only
+  [ -mode ?] ARCHIVE or REALTIME
+  [ -out_url output_url] URL for output files
+  [ -run_once] process one file and exit
+  [ -start "yyyy mm dd hh mm ss"] start time
+     ARCHIVE mode only
+  [ -trigger ?] TIME_TRIGGER or FILE_TRIGGER
+  [ -verbose ] print verbose debug messages
+
+
+NOTE: for ARCHIVE mode, you must specify the times using
+      -start and -end.
+      In this case ARCHIVE mode will be automatically invoked.
+
+TDRP args: [options as below]
+   [ -params/--params path ] specify params file path
+   [ -check_params/--check_params] check which params are not set
+   [ -print_params/--print_params [mode]] print parameters
+     using following modes, default mode is 'norm'
+       short:   main comments only, no help or descr
+                structs and arrays on a single line
+       norm:    short + descriptions and help
+       long:    norm  + arrays and structs expanded
+       verbose: long  + private params included
+       short_expand:   short with env vars expanded
+       norm_expand:    norm with env vars expanded
+       long_expand:    long with env vars expanded
+       verbose_expand: verbose with env vars expanded
+   [ -tdrp_debug] debugging prints for tdrp
+   [ -tdrp_usage] print this usage

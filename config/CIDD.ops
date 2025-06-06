@@ -72,14 +72,51 @@
 #Label    Label       URL           Colorscale Units Cont-lo-hi-interv Format Display_in_menu Bkgnd_Render
 #----------------------------------------------------------------------------------------------------------
 #
-DBZ    DBZ   mdvp:://localhost::$(TITAN_INPUT_DIR)&DBZ   dbz_color     dBZ    -5   80  5  dcont   1 0
-VEL    VEL   mdvp:://localhost::$(TITAN_INPUT_DIR)&VEL   vel_color     m/s    -5   80  5  dcont   1 0
+DBZ_MOSAIC_COMP DBZ_MOSAIC_COMPOSITE mdvp:://localhost::$(TITAN_INPUT_DIR)&DBZ   dbz_color        dBZ    -5   80  5  dcont,comp   1 0
+DBZ_MOSAIC_COMP .                    mdvp:://localhost::$(TITAN_INPUT_DIR)&DBZ   dbz_color        dBZ    -5   80  5  dcont,comp   1 0
+DBZ_MOSAIC_COMP .                    mdvp:://localhost::$(TITAN_INPUT_DIR)&DBZ   dbz_color        dBZ    -5   80  5  dcont,comp   1 0
+DBZ_MOSAIC      DBZ_MOSAIC           mdvp:://localhost::$(TITAN_INPUT_DIR)&DBZ   dbz_color        dBZ    -5   80  5  dcont        1 0
+VEL_MOSAIC      VEL_MOSAIC           mdvp:://localhost::$(TITAN_INPUT_DIR)&VEL   vel_color        m/s    -5   80  5  dcont        1 0
+WIDTH_MOSAIC    WIDTH_MOSAIC         mdvp:://localhost::$(TITAN_INPUT_DIR)&SW    width.colors     m/s    -5   80  5  dcont        1 0
+ZDR_MOSAIC      ZDR_MOSAIC           mdvp:://localhost::$(TITAN_INPUT_DIR)&ZDR   zdr.colors       dB     -5   80  5  dcont        1 0
+PHIDP_MOSAIC    PHIDP_MOSAIC         mdvp:://localhost::$(TITAN_INPUT_DIR)&PHI   phidp_360.colors deg    -5   80  5  dcont        1 0
+RHO_MOSAIC      RHO_MOSAIC           mdvp:://localhost::$(TITAN_INPUT_DIR)&RHO   rhohv.colors     -      -5   80  5  dcont        1 0
 
-#Precip-1Hr   Precip-1Hr   mdvp:://localhost::mdv/precip/1hr&#0   precip_color   mm      0  1000  50 dcont   1 0
-#Precip-24Hr  Precip-24Hr  mdvp:://localhost::mdv/precip/24hr&#0  precip_color   mm      0  1000  50 dcont   1 0
-#Rate-1Hr     Rate-1Hr     mdvp:://localhost::mdv/precip/1hr&#1   precip_color   mm      0  1000  50 dcont   1 0
+PRECIP       .             mdvp:://localhost::$(PRECIP_1HR_OUTPUT_DIR)&precip   precip_color   mm      0  1000  50 dcont   1 0
+PRECIP       .             mdvp:://localhost::$(PRECIP_1HR_OUTPUT_DIR)&precip   precip_color   mm      0  1000  50 dcont   1 0
+PRECIP       .             mdvp:://localhost::$(PRECIP_1HR_OUTPUT_DIR)&precip   precip_color   mm      0  1000  50 dcont   1 0
+#
+Precip-1Hr   Precip-1Hr    mdvp:://localhost::$(PRECIP_1HR_OUTPUT_DIR)&precip   precip_color   mm      0  1000  50 dcont   1 0
+Precip-24Hr  Precip-24Hr   mdvp:://localhost::$(PRECIP_24HR_OUTPUT_DIR)&precip  precip_color   mm      0  1000  50 dcont   1 0
+Rate-1Hr     Rate-1Hr      mdvp:://localhost::$(PRECIP_1HR_OUTPUT_DIR)&rate     precip_color   mm      0  1000  50 dcont   1 0
+
+DBZ_$(R1_NAME)      .                  mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R1_NAME)/cfradial&DBZ     dbz.colors    dBZ    -5   80  5  dcont   1 0
+DBZ_$(R1_NAME)      .                  mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R1_NAME)/cfradial&DBZ     dbz.colors    dBZ    -5   80  5  dcont   1 0
+DBZ_$(R1_NAME)      .                  mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R1_NAME)/cfradial&DBZ     dbz.colors    dBZ    -5   80  5  dcont   1 0
+
+DBZ_$(R1_NAME)      DBZ_$(R1_NAME)     mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R1_NAME)/cfradial&DBZ     dbz.colors    dBZ    -5   80  5  dcont   1 0
+VEL_$(R1_NAME)      VEL_$(R1_NAME)     mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R1_NAME)/cfradial&VEL     vel.colors    m/s    -5   80  5  dcont   1 0
+WIDTH_$(R1_NAME)    WIDTH_$(R1_NAME)   mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R1_NAME)/cfradial&WIDTH   width.colors  m/s    -5   80  5  dcont   1 0
+ZDR_$(R1_NAME)      ZDR_$(R1_NAME)     mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R1_NAME)/cfradial&ZDR     zdr.colors    dB     -5   80  5  dcont   1 0
+RHOHV_$(R1_NAME)    RHOHV_$(R1_NAME)   mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R1_NAME)/cfradial&RHO     rhohv.colors  -    -5   80  5  dcont   1 0
+PHIDP_$(R1_NAME)    PHIDP_$(R1_NAME)   mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R1_NAME)/cfradial&PHI     phidp_360.colors  deg    -5   80  5  dcont   1 0
+
+DBZ_$(R2_NAME)      .                  mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R2_NAME)/cfradial&DBZ     dbz.colors    dBZ    -5   80  5  dcont   1 0
+DBZ_$(R2_NAME)      .                  mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R2_NAME)/cfradial&DBZ     dbz.colors    dBZ    -5   80  5  dcont   1 0
+DBZ_$(R2_NAME)      .                  mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R2_NAME)/cfradial&DBZ     dbz.colors    dBZ    -5   80  5  dcont   1 0
+
+DBZ_$(R2_NAME)      DBZ_$(R2_NAME)     mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R2_NAME)/cfradial&DBZ     dbz.colors    dBZ    -5   80  5  dcont   1 0
+VEL_$(R2_NAME)      VEL_$(R2_NAME)     mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R2_NAME)/cfradial&VEL     vel.colors    m/s    -5   80  5  dcont   1 0
+WIDTH_$(R2_NAME)    WIDTH_$(R2_NAME)   mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R2_NAME)/cfradial&WIDTH   width.colors  m/s    -5   80  5  dcont   1 0
+ZDR_$(R2_NAME)      ZDR_$(R2_NAME)     mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R2_NAME)/cfradial&ZDR     zdr.colors    dB     -5   80  5  dcont   1 0
+RHOHV_$(R2_NAME)    RHOHV_$(R2_NAME)   mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R2_NAME)/cfradial&RHO     rhohv.colors  -    -5   80  5  dcont   1 0
+PHIDP_$(R2_NAME)    PHIDP_$(R2_NAME)   mdvp:://localhost:0:$(GRID_DATA_DIR)/radar$(R2_NAME)/cfradial&PHI     phidp_360.colors  deg    -5   80  5  dcont   1 0
+
 #VIL          VIL          mdvp:://localhost::mdv/vil&#0          vil_color      g/m2    0  1000  50 dcont   1 0
 #VIL-diff     VIL-diff     mdvp:://localhost::mdv/vil&#1        vil_diff_color  g/m2     0  1000  50 dcont   1 0
+
+#Terrain-1km   Terrain-1km  mdvp::1km_terrain//localhost::$(GRID_DATA_DIR)/terrain&Elevation terrain_low_tonedDown.colors m 0 100 10 cart 1 0
+#Terrain-2km   Terrain-2km  mdvp::2km_terrain//localhost::$(GRID_DATA_DIR)/terrain&Elevation terrain_low_tonedDown.colors m 0 100 10 dcont 1 0
 
 </GRIDS>
 
@@ -98,13 +135,16 @@ VEL    VEL   mdvp:://localhost::$(TITAN_INPUT_DIR)&VEL   vel_color     m/s    -5
 # MAP_CODE Control_Label   Map_File_Name   On/OFF Detail__min Detail_max Color     
 #------------------------------------------------------------------------------------------
 
+BAHAMAS           Bahamas               bs.shp               1      0.0 10000.0     green
+ICAO_FIRs         ICAO_FIRs             ICAOFIR2018Largesecurite_merged_W20.shp 1      0.0 10000.0     cyan
+AIRPORTS          Airports              bahamas_airports.map 0      0.0 10000.0     yellow
+STATES            US_State_Borders      usa.map              1      0.0 10000.0     gray50
 COUNTIES          US_Counties           us_counties.map      1      0.0 10000.0     blue
-STATES            State_Borders         usa.map              1      0.0 10000.0     green
-ROADS             Roads                 Boulder_roads.map    1      0.0 10000.0     brown
-RIVERS            Rivers                boulder_rivers.map   0      0.0 10000.0     cyan
-AIRPORTS          Airports              colo_airports.map    1      0.0 10000.0     yellow
-DIA               DIA                   DIA_all.map          1      0.0 10000.0     yellow
-TOWNS             Towns                 Colo_towns.map       0      0.0 10000.0     red
+#ROADS             Roads                 Boulder_roads.map    0      0.0 10000.0     brown
+#RIVERS            Rivers                boulder_rivers.map   0      0.0 10000.0     cyan
+#AIRPORTS          Airports              colo_airports.map    0      0.0 10000.0     yellow
+#DIA               DIA                   DIA_all.map          0      0.0 10000.0     yellow
+#TOWNS             Towns                 Colo_towns.map       0      0.0 10000.0     red
 
 </MAPS>
 
@@ -114,6 +154,7 @@ TOWNS             Towns                 Colo_towns.map       0      0.0 10000.0 
 ######################################################################################
 ######################################################################################
 <MAIN_PARAMS>
+
 
 # Parameter data base for the Configurable Interactive Data Display; CIDD
 
@@ -176,7 +217,7 @@ cidd.check_data_times:  0
 # Sets the allowable time error for data to appear in movie frames
 # (times the time_interval) (6 min * 6 = 36 minutes before or after
 # the beginning or end of the movie frame times
-cidd.stretch_factor:     6.0
+cidd.stretch_factor:     10.0
 
 # Sets whether Cidd request data closest to the midpoint of a movie
 # frame (0) or the end (1). 
@@ -348,7 +389,9 @@ cidd.domain_limit_max_y:         1000
 # are relative to this point.
 cidd.origin_longitude:       $(RADAR_LON)
 cidd.origin_latitude:        $(RADAR_LAT)
-#
+#cidd.origin_longitude:       -77.46242
+#cidd.origin_latitude:        25.05212
+
 #
 # Select the data fields/page to start on.
 cidd.planview_start_page:   1
@@ -411,7 +454,7 @@ cidd.max_adeg:               360.0
 # List of comma delimited local directories or HTTP URLs to search
 # Searchs . then each directory/URL in order 
 cidd.color_file_subdir:   $(PROC_PARAMS)/color_scales
-cidd.map_file_subdir:     $(PROC_PARAMS)/maps
+cidd.map_file_subdir:     $(PROC_PARAMS)/maps, https://apps.ral.ucar.edu/maps/shapefile/transportation/caribbean/bahamas
 
 #
 # Station locator features
@@ -500,9 +543,11 @@ cidd.range_ring_color: gray
 # Set the follwing colors to 'transparent' to avoid having these
 # plotted. (This is the default) Otherwise, these data will be
 # plotted in the indicated color
-cidd.missing_data_color: grey20
-
-cidd.bad_data_color: grey20
+#cidd.missing_data_color: grey20
+cidd.missing_data_color: transparent
+#
+#cidd.bad_data_color: grey20
+cidd.bad_data_color: transparent
 #
 # Time Control (Movie) Popup Colors
 cidd.epoch_indicator_color: orange
@@ -621,7 +666,7 @@ cidd.range_ring_spacing:        50.0
 cidd.range_ring_x_space:    40
 cidd.range_ring_y_space:    13
 cidd.azmith_interval:       30.0
-cidd.azmith_radius:         200.0
+cidd.azmith_radius:         50.0
 
 # Toggles to turn on/off  Extras features on startup
 cidd.range_rings:             1
@@ -772,7 +817,7 @@ cidd.draw_clock_local: 0
 # Set this parameter to force the field menu popup to this many columns
 # If set <= 0, then cidd sets this dynamically, allowing at most 30 in each
 # column.
-cidd.num_field_menu_cols: 1
+cidd.num_field_menu_cols: 3
 
 # This parameter sets WSDDM specific behavior On -
 # - Go to end of loop when movie stops.
@@ -920,7 +965,7 @@ cidd.menu_bar_funct14: EXIT_BUTTON
 
 ##########################################
 
-cidd.horiz_frame_label:  **  Colorado/ Front Range **
+cidd.horiz_frame_label:  **  $(RADAR_DATA_INFO) **
 
 # Set the message to display when no data is availible
 cidd.no_data_message:     NO DATA FOUND (in this area at the selected time)
@@ -1092,3 +1137,114 @@ prod_info = {
 };
 
 </SYMPRODS> 
+
+<TERRAIN>
+//======================================================================
+//
+// Terrain Parameters.
+//
+//======================================================================
+ 
+///////////// id_label ////////////////////////////////
+//
+// Label used for legends.
+//
+// Type: string
+//
+
+id_label = "Terrain";
+
+///////////// terrain_url /////////////////////////////
+//
+// Used to located gridded terrain data.
+// Terrain_URL 
+//  Note example URL:
+//   mdvp::static//venus::mdv/terrain&Elevation
+//  Field name follows the Ampersand. Use #N for field number override   
+//   Use caret: ^ as a substitute for spaces in field names.
+//
+// Type: string
+//
+
+terrain_url = "mdvp::1km_terrain//localhost::$(GRID_DATA_DIR)/terrain&Elevation";
+
+///////////// height_scaler ///////////////////////////
+//
+// Conversion from terrain units to local coords.
+// Choose a scaler which converts plane height values
+// Default is Hecto-feet (FL) per meter.
+//
+// Type: double
+//
+
+//height_scaler = 0.0328083;
+height_scaler = 0.001;
+
+///////////// landuse_url /////////////////////////////
+//
+// Used to located gridded land use data.
+// Land Use URL 
+//  Note URL is of the form 
+//   mdvp::[param_file]//host.dom::dir/dir&field_name
+//  Field name follows the Ampersand. Use #N for field number override   
+//   Use caret: ^ as a substitute for spaces in field names.
+//
+// Type: string
+//
+
+landuse_url = "mdvp::1km_terrain//localhost::$(GRID_DATA_DIR)/terrain&Elevation";
+
+///////////// landuse_colorscale //////////////////////
+//
+// Color lookup table for Land use.
+// Land Use colorscale file name
+//  Note: CIDD looks in the colorscale dir, then in the current dir for 
+//   this file.
+//
+// Type: string
+//
+
+landuse_colorscale = "terrain_low_tonedDown.colors";
+
+///////////// land_use_render_method //////////////////
+//
+// Land Use rendering style.
+// Use Contours only for continious data like elevation.
+//
+// Type: enum
+// Options:
+//     RENDER_FILLED_CONT
+//     RENDER_RECTANGLES
+//     RENDER_DYNAMIC_CONTOURS
+//
+
+land_use_render_method = RENDER_RECTANGLES;
+
+///////////// landuse_active //////////////////////////
+//
+// Default Display state of Land Use/ Basemap.
+//
+// Type: boolean
+//
+
+landuse_active = TRUE;
+
+///////////// earth_color1 ////////////////////////////
+//
+// Earth's skin color.
+//
+// Type: string
+//
+
+earth_color1 = "sienna";
+
+///////////// earth_color2 ////////////////////////////
+//
+// Earth's core color.
+//
+// Type: string
+//
+
+earth_color2 = "red4";
+
+</TERRAIN>

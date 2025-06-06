@@ -1,0 +1,189 @@
+/**********************************************************************
+ * TDRP params for DsMdvServer
+ **********************************************************************/
+
+//======================================================================
+//
+// DEBUGGING AND PROCESS CONTROL.
+//
+//======================================================================
+ 
+///////////// debug ///////////////////////////////////
+//
+// Debug option.
+//
+// If set, debug messages will be printed appropriately.
+//
+//
+// Type: enum
+// Options:
+//     DEBUG_OFF
+//     DEBUG_NORM
+//     DEBUG_VERBOSE
+//
+
+debug = DEBUG_OFF;
+
+///////////// no_threads //////////////////////////////
+//
+// Option to prevent server from using a thread per client.
+//
+// For debugging purposes it it sometimes useful to suppress the use of 
+//   threads. Set no_threads to TRUE for this type of debugging.
+//
+//
+// Type: boolean
+//
+
+no_threads = FALSE;
+
+///////////// instance ////////////////////////////////
+//
+// Process instance.
+//
+// Used for procmap registration and auto restarting. If an empty 
+//   instance name is provided, the server automatically uses the port 
+//   number as its instance name.
+//
+//
+// Type: string
+//
+
+instance = "1km_terrain";
+
+//======================================================================
+//
+// SERVER MANAGER SUPPORT.
+//
+//======================================================================
+ 
+///////////// port ////////////////////////////////////
+//
+// Port number.
+//
+// The server listens on this port for client requests.
+//
+//
+// Type: int
+//
+
+port = 5440;
+
+///////////// qmax ////////////////////////////////////
+//
+// Max quiescent period (secs).
+//
+// If the server does not receive requests for this time period, it will 
+//   die gracefully.
+//
+//
+// Type: int
+//
+
+qmax = 1800;
+
+///////////// max_clients /////////////////////////////
+//
+// Maximum number of clients.
+//
+// This is the maximum number of threads the application will produce to 
+//   handle client requests.  If the maximum is reached, new clients will 
+//   receive a SERVICE_DENIED error message and will have to request the 
+//   data again.  If set to -1, no maximum is enforced.
+//
+//
+// Type: int
+//
+
+max_clients = 32;
+
+//======================================================================
+//
+// SECURITY.
+//
+//======================================================================
+ 
+///////////// run_secure //////////////////////////////
+//
+// Option to run in secure mode.
+//
+// If TRUE, the server will reject any URLs which specify an absolute 
+//   path, or a path with .. in it. This prevents the server from writing 
+//   any files which are not below DATA_DIR in the directory tree.
+//
+//
+// Type: boolean
+//
+
+run_secure = FALSE;
+
+///////////// run_read_only ///////////////////////////
+//
+// Option to run in read-only mode.
+//
+// If TRUE, the server will respond only to read requests, and will 
+//   ignore write requests.
+//
+//
+// Type: boolean
+//
+
+run_read_only = FALSE;
+
+///////////// allow_http //////////////////////////////
+//
+// Option to allow http requests.
+//
+// If TRUE, the server will strip off header in request message.
+//
+//
+// Type: boolean
+//
+
+allow_http = TRUE;
+
+//======================================================================
+//
+// MEMORY MANAGEMENT FOR MESSAGES.
+//
+//======================================================================
+ 
+///////////// copy_message_memory /////////////////////
+//
+// Option to copy memory from the messages into the message objects.
+//
+// Setting to FALSE will reduce the memory usage for the program.
+//
+//
+// Type: boolean
+//
+
+copy_message_memory = TRUE;
+
+//======================================================================
+//
+// Static files.
+//
+// Option to serve out data from a static file if a time-based request 
+//   is made.
+//
+//======================================================================
+ 
+///////////// use_static_file /////////////////////////
+//
+// Option to serve out data from a static file.
+// If set, the data will always be read from a static file. The file url 
+//   is specified below. The times in the header will be set to match the 
+//   request time.
+// Type: boolean
+//
+
+use_static_file = TRUE;
+
+///////////// static_file_url /////////////////////////
+//
+// URL for static file.
+// Type: string
+//
+
+static_file_url = "mdvp:://localhost::$(GRID_DATA_DIR)/terrain/bahamas_terrain_1km.mdv.cf.nc";

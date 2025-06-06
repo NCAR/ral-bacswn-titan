@@ -9,9 +9,13 @@
 $LOG_DIR                                           local
 #
 $GRID_DATA_DIR                                     local   
+$INPUT_RADAR_DIR                                   local 
+$INPUT_RADAR_DIR/${R1_NAME}                        local 
+$INPUT_RADAR_DIR/${R2_NAME}                        local 
 #
 # Server files for forecast statistics
 #
 $TITAN_SPDB_DIR                                    local _Tstorms2Symprod.fcst_30min _Tstorms2Symprod.fcst_60min
-
+$GRID_DATA_DIR/terrain                             local bahamas_terrain_1km.mdv.cf.nc bahamas_terrain_2km.mdv.cf.nc
+$GRID_DATA_DIR/terrain                             local _DsMdvServer.1km_terrain _DsMdvServer.2km_terrain
 ####################################################################

@@ -1,15 +1,15 @@
 #!/bin/bash
 
-RADAR_NAME=$RADAR_NAME
-export radar_name=`echo $RADAR_NAME | tr "[A-Z]" "[a-z]"`    
+export INPUT_RADAR_NAME=$R2_NAME
+export radar_name=`echo $INPUT_RADAR_NAME | tr "[A-Z]" "[a-z]"`    
 
 cd $PROC_PARAMS
 
 #used for instance name and output directory structure
-export OUTPUT_MODE=cfradial
+export OUTPUT_MODE=cart
 
-APPLICATION=RadxConvert
-export INSTANCE=${RADAR_NAME}_${OUTPUT_MODE}
+APPLICATION=Radx2Grid
+export INSTANCE=RADAR-2_${OUTPUT_MODE}
 
 running "$APPLICATION -params $APPLICATION.params -instance $INSTANCE"
 if [[ $? -eq 1 ]];  then

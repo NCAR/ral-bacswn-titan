@@ -399,7 +399,7 @@ RemoveEmptyDirs = TRUE;
 // Type: double
 //
 
-MaxDirAgeDays = 0;
+MaxDirAgeDays = 2;
 
 ///////////// MaxDirAgeSecs ///////////////////////////
 //

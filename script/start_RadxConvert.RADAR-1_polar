@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export INPUT_RADAR_NAME=$R1_NAME
+export radar_name=`echo $INPUT_RADAR_NAME | tr "[A-Z]" "[a-z]"`    
+
+cd $PROC_PARAMS
+
+#used for instance name and output directory structure
+export OUTPUT_MODE=cfradial
+
+APPLICATION=RadxConvert
+export INSTANCE=RADAR-1_${OUTPUT_MODE}
+
+running "$APPLICATION -params $APPLICATION.params -instance $INSTANCE"
+if [[ $? -eq 1 ]];  then
+    echo "$APPLICATION -params $APPLICATION.params -instance $INSTANCE"
+    $APPLICATION -params $APPLICATION.params -instance $INSTANCE |& LogFilter -d $LOG_DIR -p $APPLICATION -i $INSTANCE &
+fi

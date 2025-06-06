@@ -7,7 +7,7 @@
 DsProxyServer          primary                         start_inst()                 snuff_inst      localhost
 DataMapper             primary                         start_inst(no-params)        snuff_inst      localhost
 DsServerMgr            primary                         start_inst(no-params)        snuff_inst      localhost
-#Janitor                titan_input                     start_inst()                 snuff_inst      localhost
+Janitor                titan_input                     start_inst()                 snuff_inst      localhost
 Janitor                titan_work                      start_inst()                 snuff_inst      localhost
 Janitor                titan_logs                      start_inst()                 snuff_inst      localhost
 
@@ -17,8 +17,12 @@ Janitor                titan_logs                      start_inst()             
 #
 ##################################################
 #
-RadxConvert            KFTG_cfradial                   start_RadxConvert.RADAR_polar snuff_inst      localhost
-Radx2Grid              KFTG_cart                       start_Radx2Grid.RADAR_cart    snuff_inst      localhost
+InputWatcher           raw_radar                       start_inst()                    snuff_inst      localhost
+RadxConvert            RADAR-1_cfradial                start_RadxConvert.RADAR-1_polar snuff_inst      localhost
+Radx2Grid              RADAR-1_cart                    start_Radx2Grid.RADAR-1_cart    snuff_inst      localhost
+RadxConvert            RADAR-2_cfradial                start_RadxConvert.RADAR-2_polar snuff_inst      localhost
+Radx2Grid              RADAR-2_cart                    start_Radx2Grid.RADAR-2_cart    snuff_inst      localhost
+MdvMerge2              mosaic                          start_inst()                    snuff_inst      localhost
 
 ##################################################
 #
@@ -29,3 +33,11 @@ Radx2Grid              KFTG_cart                       start_Radx2Grid.RADAR_car
 Titan                  ops                             start_inst()                      snuff_inst      localhost
 Tstorms2Spdb           ops                             start_inst()                      snuff_inst      localhost
 
+##################################################
+#
+# PRECIP PROCESSES
+#
+##################################################
+PrecipAccum            single                          start_inst()                      snuff_inst      localhost
+PrecipAccum            1hr                             start_inst()                      snuff_inst      localhost
+PrecipAccum            24hr                            start_inst()                      snuff_inst      localhost

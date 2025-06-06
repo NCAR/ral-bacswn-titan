@@ -1,24 +1,44 @@
 #
-# RADAR #1 info
+export R1_NAME="NAS"
+export R1_SITE_NAME="$R1_NAME / Bahamas"
+export R1_LAT=25.05212
+export R1_LON=-77.46242
+export R1_ALT_KM=0.028
+export R1_ALT_M=28
+export R1_DESCRIPTION="NASSAU Radar"
+export R1_DATA_INFO="$R1_SITE_NAME"
 #
-export R1_NAME="KFTG"
-export R1_SITE_NAME=$R1_NAME
-export R1_LAT=39.7866
-export R1_LON=-104.546
-export R1_ALT_KM=1.709
-export R1_ALT_M=1709
-export R1_DESCRIPTION="Front Range NEXRAD"
-export R1_DATA_INFO="NEXRAD mosaic Front Range"
+export R2_NAME="MLT"
+export R2_SITE_NAME="$R2_NAME / Bahamas"
+export R2_LAT=23.6000
+export R2_LON=-75.3000
+export R2_ALT_KM=0.017
+export R2_ALT_M=17
+export R2_DESCRIPTION="Millerton Radar"
+export R2_DATA_INFO="$R2_SITE_NAME"
 #
-export R2_NAME="KFTG"
-export R2_SITE_NAME=$R2_NAME
-export R2_LAT=39.7866
-export R2_LON=-104.546
-export R2_ALT_KM=1.709
-export R2_ALT_M=1709
-export R2_DESCRIPTION="Front Range NEXRAD"
-export R2_DATA_INFO="NEXRAD mosaic Front Range"
+###############################
+# Realtime testing nexrad radar
+# comment out for bahamas
+###############################
+#export R1_NAME="KFTG"
+#export R1_SITE_NAME=$RT_NAME
+#export R1_LAT=39.7866
+#export R1_LON=-104.546
+#export R1_ALT_KM=1.709
+#export R1_ALT_M=1709
+#export R1_DESCRIPTION="Front Range NEXRAD"
+#export R1_DATA_INFO="$R1_SITE_NAME / Front Range"
 #
+#export R2_NAME="KCYS"
+#export R2_SITE_NAME="$R2_NAME / Bahamas"
+#export R2_LAT=41.1519
+#export R2_LON=-104.8061
+#export R2_ALT_KM=1.868
+#export R2_ALT_M=1868
+#export R2_DESCRIPTION="Cheyenne Radar"
+#export R2_DATA_INFO="$R2_SITE_NAME"
+###############################
 #
 export RADAR_NAME=$R1_NAME
 export SITE_NAME=$R1_SITE_NAME
@@ -29,13 +49,19 @@ export RADAR_ALT_M=$R1_ALT_M
 export RADAR_DESCRIPTION=$R1_DESCRIPTION
 export RADAR_DATA_INFO=$R1_DATA_INFO
 #
-export TITAN_INPUT_DIR=$GRID_DATA_DIR/radar${RADAR_NAME}/cart
-export TITAN_OUTPUT_DIR=$PROJ_DATA_DIR/titan/storms/$RADAR_NAME
-export TITAN_SPDB_DIR=$SPDB_DATA_DIR/storms/$RADAR_NAME
+#export TITAN_INPUT_DIR=$GRID_DATA_DIR/radar${RADAR_NAME}/cart
+#export TITAN_OUTPUT_DIR=$PROJ_DATA_DIR/titan/storms/$RADAR_NAME
+#export TITAN_SPDB_DIR=$SPDB_DATA_DIR/storms/$RADAR_NAME
+#export PRECIP_OUTPUT_DIR=$GRID_DATA_DIR/precip/$RADAR_NAME/single
+#export PRECIP_1HR_OUTPUT_DIR=$GRID_DATA_DIR/precip/$RADAR_NAME/1hr
+#export PRECIP_24HR_OUTPUT_DIR=$GRID_DATA_DIR/precip/$RADAR_NAME/24hr
 #
-#export TITAN_INPUT_DIR=$GRID_DATA_DIR/radarCartMerge
-#export TITAN_OUTPUT_DIR=$PROJ_DATA_DIR/titan/storms/mosaic
-#export TITAN_SPDB_DIR=$SPDB_DATA_DIR/storms/mosaic
+export TITAN_INPUT_DIR=$GRID_DATA_DIR/radarCartMerge
+export TITAN_OUTPUT_DIR=$PROJ_DATA_DIR/titan/storms/mosaic
+export TITAN_SPDB_DIR=$SPDB_DATA_DIR/storms/mosaic
+export PRECIP_OUTPUT_DIR=$GRID_DATA_DIR/precip/radarCartMerge/single
+export PRECIP_1HR_OUTPUT_DIR=$GRID_DATA_DIR/precip/radarCartMerge/1hr
+export PRECIP_24HR_OUTPUT_DIR=$GRID_DATA_DIR/precip/radarCartMerge/24hr
 #
 
 #
@@ -51,7 +77,8 @@ export SCAN_DELTA_T=300
 #
 # Lowest cappi for cart grid (km)
 #
-export CART_GRID_START_HT=1.5
+export CART_GRID_START_HT=0.1
+#export CART_GRID_START_HT=1.5
 
 # Start height for Rview
 

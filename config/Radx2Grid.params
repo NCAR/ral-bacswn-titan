@@ -74,7 +74,7 @@ debug = DEBUG_NORM;
 // Type: string
 //
 
-input_dir = "$(GRID_DATA_DIR)/radar$(RADAR_NAME)/cfradial";
+input_dir = "$(GRID_DATA_DIR)/radar$(INPUT_RADAR_NAME)/cfradial";
 
 ///////////// mode ////////////////////////////////////
 //
@@ -154,7 +154,7 @@ end_time = "2015 06 26 12 00 00";
 // Type: string
 //
 
-output_dir = "$(GRID_DATA_DIR)/radar$(RADAR_NAME)/cart";
+output_dir = "$(GRID_DATA_DIR)/radar$(INPUT_RADAR_NAME)/cart";
 
 ///////////// output_format ///////////////////////////
 //
@@ -352,9 +352,9 @@ beam_width_fraction_for_data_limit_extension = 0.5;
 //
 
 grid_z_geom = {
-    nz = 30,
+    nz = $(CART_NZ),
     minz = $(CART_GRID_START_HT),
-    dz = 0.5
+    dz = $(CART_DZ)
 };
 
 ///////////// specify_individual_z_levels /////////////
@@ -437,12 +437,12 @@ z_level_array = {
 //
 
 grid_xy_geom = {
-    nx = 460,
-    ny = 460,
-    minx = -229.5,
-    miny = -229.5,
-    dx = 1.0,
-    dy = 1.0
+    nx = $(CART_NX),
+    ny = $(CART_NY),
+    minx = $(CART_MINX),
+    miny = $(CART_MINY),
+    dx = $(CART_DX),
+    dy = $(CART_DY)
 };
 
 ///////////// center_grid_on_radar ////////////////////

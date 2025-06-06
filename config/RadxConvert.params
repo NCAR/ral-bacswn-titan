@@ -60,7 +60,7 @@ instance = "$(INSTANCE)";
 // Type: string
 //
 
-input_dir = "$(INPUT_RADAR_DIR)/$(RADAR_NAME)";
+input_dir = "$(INPUT_RADAR_DIR)/$(INPUT_RADAR_NAME)";
 
 ///////////// mode ////////////////////////////////////
 //
@@ -94,7 +94,7 @@ mode = REALTIME;
 // Type: int
 //
 
-max_realtime_data_age_secs = 300;
+max_realtime_data_age_secs = 600;
 
 ///////////// latest_data_info_avail //////////////////
 //
@@ -1421,7 +1421,7 @@ write_other_fields_unchanged = TRUE;
 // Type: boolean
 //
 
-exclude_specified_fields = TRUE;
+exclude_specified_fields = FALSE;
 
 ///////////// excluded_fields /////////////////////////
 //
@@ -1818,7 +1818,7 @@ compression_level = 4;
 // Type: string
 //
 
-output_dir = "$(GRID_DATA_DIR)/radar$(RADAR_NAME)/$(OUTPUT_MODE)";
+output_dir = "$(GRID_DATA_DIR)/radar$(INPUT_RADAR_NAME)/$(OUTPUT_MODE)";
 
 ///////////// output_filename_mode ////////////////////
 //

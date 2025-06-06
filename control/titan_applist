@@ -28,4 +28,6 @@ apps=(
     Titan
     Tstorms2Spdb
     Tstorms2Symprod
+    PrecipAccum
+    MdvMerge2
 )

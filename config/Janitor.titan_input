@@ -385,7 +385,7 @@ MaxNumFilesInDir = -1;
 // Type: boolean
 //
 
-RemoveEmptyDirs = TRUE;
+RemoveEmptyDirs = FALSE;
 
 ///////////// MaxDirAgeDays ///////////////////////////
 //
@@ -399,7 +399,7 @@ RemoveEmptyDirs = TRUE;
 // Type: double
 //
 
-MaxDirAgeDays = 0;
+MaxDirAgeDays = 7;
 
 ///////////// MaxDirAgeSecs ///////////////////////////
 //
@@ -413,7 +413,7 @@ MaxDirAgeDays = 0;
 // Type: int
 //
 
-MaxDirAgeSecs = 0;
+MaxDirAgeSecs = 86400;
 
 //======================================================================
 //
