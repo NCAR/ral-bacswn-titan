@@ -10,7 +10,7 @@ umask 002
 ulimit -m unlimited
 
 export PROJ=titan
-export TOP_DIR=$HOME
+export TOP_DIR=/data
 . $TOP_DIR/apps/$PROJ/control/${PROJ}_env
 #
 # set a fancy prompt (non-color, unless we know we "want" color)                                                                                                                                                                                                              
