@@ -11,3 +11,10 @@ SHELL=/bin/bash
 0,10,20,30,40,50 * * * * . $HOME/.bashrc ; start_auto_restart_check_cron > /dev/null 2>&1
 2,12,22,32,42,52 * * * * . $HOME/.bashrc ; start_procmap_check_cron > /dev/null 2>&1
 #################################################
+
+##################################################
+#
+# Check for new radar data
+#
+*/1 * * * * . $HOME/.bashrc ; pull_radar_files.bash > $LOG_DIR/pull_radar_files.log 2>&1
+#################################################

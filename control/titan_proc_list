@@ -17,7 +17,7 @@ Janitor                titan_logs                      start_inst()             
 #
 ##################################################
 #
-InputWatcher           raw_radar                       start_inst()                    snuff_inst      localhost
+#InputWatcher           raw_radar                       start_inst()                    snuff_inst      localhost
 RadxConvert            RADAR-1_cfradial                start_RadxConvert.RADAR-1_polar snuff_inst      localhost
 Radx2Grid              RADAR-1_cart                    start_Radx2Grid.RADAR-1_cart    snuff_inst      localhost
 RadxConvert            RADAR-2_cfradial                start_RadxConvert.RADAR-2_polar snuff_inst      localhost

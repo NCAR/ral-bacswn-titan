@@ -4,8 +4,11 @@ import os
 import shutil
 import argparse
 
+RADAR1 = os.environ.get('R1_NAME')
+RADAR2 = os.environ.get('R2_NAME')
+
 # 🔑 Define keywords to search for in the file name
-KEYWORDS = ["KFTG", "KCYS"]  # Edit this list as needed
+KEYWORDS = ["$RADAR1", "$RADAR2"]  # Edit this list as needed
 
 def move_file_if_contains_keywords(file_path, base_output_dir):
     file_name = os.path.basename(file_path)
