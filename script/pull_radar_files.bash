@@ -2,7 +2,7 @@
 
 # === CONFIGURATION ===
 REMOTE_USER="radarop"
-REMOTE_HOST="nws4.rap.ucar.edu"
+REMOTE_HOST="172.16.156.20"
 REMOTE_DIR="/usr/iris_data/product_raw"
 PREFIX_LIST=("$R1_NAME" "$R2_NAME")
 LOCAL_BASE_DIR="$INPUT_RADAR_DIR"
@@ -41,6 +41,6 @@ for PREFIX in "${PREFIX_LIST[@]}"; do
 
         # SCP the file from remote to local
         scp "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_FILE}" "$LOCAL_FILE"
-        sleep 2
+        sleep 5
     done
 done
