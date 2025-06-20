@@ -443,7 +443,7 @@ merge_fields = {
   }
   ,
   {
-    name = "RHO",
+    name = "RHOHV",
     merge_method = MERGE_MIN,
     merge_encoding = FLOAT32,
     merge_scale = 0.5,
@@ -452,7 +452,7 @@ merge_fields = {
   }
   ,
   {
-    name = "PHI",
+    name = "KDP",
     merge_method = MERGE_MIN,
     merge_encoding = FLOAT32,
     merge_scale = 0.5,
