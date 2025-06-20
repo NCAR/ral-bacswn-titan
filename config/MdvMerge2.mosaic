@@ -434,15 +434,6 @@ merge_fields = {
   }
   ,
   {
-    name = "SW",
-    merge_method = MERGE_MIN,
-    merge_encoding = FLOAT32,
-    merge_scale = 0.5,
-    merge_bias = -32,
-    output_encoding = INT16
-  }
-  ,
-  {
     name = "ZDR",
     merge_method = MERGE_MAX,
     merge_encoding = FLOAT32,
